@@ -69,7 +69,7 @@ Immutable means that you can't change the content of the string once it's initia
     The position of last 'o' is: 7
 ```
 ### Get substring
-The first index doesn't count, the second index counts.
+The first index counts, the second index doesn't count.
 ```java
         System.out.println(s1.substring(6, 11));
 ```
@@ -77,3 +77,30 @@ The first index doesn't count, the second index counts.
 For instance, if the length of the string is N, the time complexity of both finding operation and substring operation is O(N).
 
 Never forget to take the time complexity of built-in operations into consideration when you compute the time complexity for your solution.
+
+## 28 Implement strStr()
+First is to check the edge cases: 
+
+1), Either needle or haystack is empty, we return -1.
+
+2), if the haystack is exactly the same as the needle, we would just need to return 0, and the time complexity would be O(n).
+
+```java
+  if (needle.length() == 0 || haystack.length() == 0) return -1;
+  if (haystack.equals (needle)) return 0;
+```
+Next, what we do is that we will use a window of the length of strlength to check one by one while looping through haystack. from index [0, strlength] to index [haystack.length(), haystack.length() + strlength], and to see if the substring matches with the needle.
+
+```java
+  int strlength = needle.length(); 
+        int output = -1;
+        for (int i = 0; i <= haystack.length() - strlength; i ++){
+              if (haystack.substring(i, i + strlength).equals(needle)){
+                 return i;
+              }
+        }
+  return -1;
+```
+
+
+
