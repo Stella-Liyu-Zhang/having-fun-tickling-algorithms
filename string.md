@@ -53,6 +53,8 @@ Immutable means that you can't change the content of the string once it's initia
 
 > 2), In some other languages (like Java), the string is immutable. This feature will bring several problems. We will illustrate the problems and solutions in the next article.
 
+In java, if we use ```java StringBuilder sb = new StringBuilder(); ``` the stringbuilder element is able to be changed after it is created. 
+
 ## Extra Operations
 ### concatenate
 ```java
@@ -102,5 +104,50 @@ Next, what we do is that we will use a window of the length of strlength to chec
   return -1;
 ```
 
+## 67. Add Binary
+To do this, 
+First, we will define a StringBuilder element called sb:
+```java
+StringBuilder sb = new StringBuilder(); // immutability
+```
+Next, we make 2 pointers that both start from the end of the 2 strings:
+```java
+int i = a.length() - 1, j = b.length() - 1, carry = 0;
+```
+1) First, check if there is a carry from the last addition. If so, we add it to the sum:
+```java
+int sum = carry;
+```
+2) then, we will add the charAt(j) of both a and b - '0' to the sum. 
+```java
+        if (i >= 0){
+                sum += a.charAt(i) - '0';
+                i--;
+        }
+        if (j >= 0){
+                sum += b.charAt(j) - '0';
+                j--;
+        }
+```
+3) Next, we append the sum%2 to the sb
+```java
+        sb.append(sum%2);
+```
+4) Let carry be sum/2
+```java
+        carry = sum/2;
 
+```
+5) if (carry!=0) after the loop, we will append the leftover carry.
+```java
+        if (carry != 0){
+            sb.append(carry);
+        }
+```
+6) Reverse the whole stringbuilder, and make it to string with toString() method.
+```java
+        return sb.reverse().toString();
+```
+## 14. Longest Common Prefix
 
+First, we have to loop through all the strings, 
