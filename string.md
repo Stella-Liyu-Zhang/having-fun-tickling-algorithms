@@ -148,6 +148,45 @@ int sum = carry;
 ```java
         return sb.reverse().toString();
 ```
-## 14. Longest Common Prefix
 
-First, we have to loop through all the strings, 
+## 14. Longest Common Prefix
+One thing to notice is that Prefix is the substring that starts from the first index of a string!!!
+
+1) First, we sort the array in the ascending order so that we only need to compare the first and the last string. 
+```java
+ public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0) return "";
+        Arrays.sort(strs);
+        String first = strs[0];
+        String last = strs[strs.length-1];
+````
+Next, we will compare each index from the first to the last index of the shortest string, which is the first string strs[0].length. Whenever there is a character that is different, we will break and no longer need to compare further.
+```java
+        int c = 0;
+        
+        while ( c < first.length()){
+            if (first.charAt(c)==(last.charAt(c))){
+                c++;
+            }else{
+                break;
+            }
+        }
+ ```
+If the c never increment and is 0, this means that the whole array of string doesn't have a single common predix, and we will return an empty string. 
+ ```java
+        if(c == 0){
+            return "";
+        }else{
+            return strs[0].substring(0,c);
+        }
+    }
+```
+The Big O would be the length of the shared prefix, since we only need to compare until the end of the shared prefix.
+
+## 561. Array Partition I
+
+Given an integer array nums of 2n integers, group these integers into n pairs (a1, b1), (a2, b2), ..., (an, bn) such that the sum of min(ai, bi) for all i is maximized. Return the maximized sum.
+
+> 1) We sort the array first, and we pair the ith with the (i+1)th. 
+
+## 485. Max Consecutive Ones
