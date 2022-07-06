@@ -237,3 +237,6 @@ for(int i = bottom; i >= top; i--) res.add(matrix[i][left]);
             if(left > right || top > bottom) break;
 ```
 **How to check if we reach a wall!!!**  : ```if(left > right || top > bottom) break;``` inside a while loop.
+
+## 119. Pascal's Triangle II
+
