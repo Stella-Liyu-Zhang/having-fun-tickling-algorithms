@@ -63,24 +63,31 @@ If there is no such subarray, return 0 instead.
 ```java
         if (nums.length == 0) return 0;
 ```
-> We will have 2 pointers, where the left pointer stays while the right pointer will move from [left+1] till the end of the aray arr.length - 1. 
+The algorithm follows:
+- FIrst, we set the minimimum value that shall be returned to be the maximum value in integer, sum = 0, and left = 0 (since we start from the very leftest of the array.)
 ```java
-        int ans = Integer.MAX_VALUE;
-        int sum = 0;
-        int localAns = 0;
-        for(int right = 0, left = 0; right < nums.length; right ++){
-            sum += nums[i];
-            localAns ++;
-        }
-
+        int minNum = Integer.MAX_VALUE;
+        int val_sum = 0;
+        int left = 0;
 ```
-> And when we have the left pointer move from 0 to the arr.length - 2 position.
-
-> Within each window, we will sum up the total value of arr[left]+....+arr[right], and check if the sum == target
-
-> If sum == target, we track the currNum = right - left + 1, and update the minNum = Math.min(currNum, minNum)
-
-> 
-
+- Next, we loop through the whole array, and increment the array until the sum is greater than or equal to target.
+```java
+        for (int i = 0; i < nums.length; i++){
+            val_sum += nums[i];
+```
+  - Once the (val_sum >= target), we set the minNum to be the minimal one of the current length of the array (i-left+1)
+  - we will decrement the val_sum by the leftest element, and increment left window by 1.
+```java
+            while (val_sum >= target){
+                minNum = Math.min(minNum, i-left+1);
+                val_sum -= nums[left];
+                left ++;
+            }
+```
+- By doing this, we continue to add new elements in the array and the window is moved one right.
+- Ultimately, we will return the minNum. If the minNum is still equal to the Integer.MAX_VALUE, then there is no such sum >= target, we will return 0.
+```java
+        return minNum != Integer.MAX_VALUE ? minNum : 0;
+```
 ## 76. Minimum Window Substring
-
+First, what need ed to be approached is to make sure 
