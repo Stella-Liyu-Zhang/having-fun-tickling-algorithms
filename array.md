@@ -239,4 +239,15 @@ for(int i = bottom; i >= top; i--) res.add(matrix[i][left]);
 **How to check if we reach a wall!!!**  : ```if(left > right || top > bottom) break;``` inside a while loop.
 
 ## 119. Pascal's Triangle II
-
+```java
+  Integer[] arr = new Integer[rowIndex+1];
+        Arrays.fill(arr, 0);
+        arr[0] = 1;
+        
+        for(int i = 1; i <= rowIndex; i++){
+            for(int j = i; j > 0; j--){
+                arr[j] +=arr[j-1];
+            }
+        }
+        return Arrays.asList(arr);
+```
