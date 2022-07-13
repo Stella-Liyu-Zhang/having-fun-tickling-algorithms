@@ -112,3 +112,44 @@ if (root == null) return output;
 
 **Breadth-First Search** is an algorithm to traverse or search in data structures like a tree or a graph. The algorithm starts with a root node and visit the node itself first. Then traverse its neighbors, traverse its second level neighbors, traverse its third level neighbors, so on and so forth.
 
+
+## 101. Symmetric Tree
+
+
+1) Iterative Solution
+
+    The logic is pretty clear:
+    1) First thing first, there is no need to check if the root is symmetric, and we don't need to push it onto the stack
+    2) every time we push the right and left nodes onto the stack, and we pop the left and right nodes, while checking:
+        - If both of them are null, good to continue
+        - If one of them is null while the other is not, return false
+        - if the values of left and right are different, return false
+    3) And for each pairs of left right, we want to push their four children onto the stack for further checking.
+    4) Until the last remaing pairs of left and right are both null, we quit the while loop.
+
+
+
+2) Recursive Solution
+
+
+## 112. Path Sum
+
+1) Iterative Solution
+
+
+2) Recursive Solution
+
+To do this problem recursively, we will
+- First, we will check if the root is null. If the root is null, we wil return false. 
+- **ONLY IF** both the left child and right child are null, and the current root equals the deducted target sum of all the nodes in the path will we return true. 
+    - how to recur? We will update the sum to be (sum-root.val) each time we recur
+
+## 106. Construct Binary Tree from Inorder and Postorder Traversal
+
+Given two integer arrays inorder and postorder where inorder is the inorder traversal of a binary tree and postorder is the postorder traversal of the same tree, construct and return the binary tree.
+
+
+Reflections: 
+This problem is relatively hard to solve.
+
+
