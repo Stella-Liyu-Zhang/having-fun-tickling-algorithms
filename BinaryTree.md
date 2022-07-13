@@ -112,3 +112,36 @@ if (root == null) return output;
 
 **Breadth-First Search** is an algorithm to traverse or search in data structures like a tree or a graph. The algorithm starts with a root node and visit the node itself first. Then traverse its neighbors, traverse its second level neighbors, traverse its third level neighbors, so on and so forth.
 
+```java
+We use a BFS
+ public List<List<Integer>> levelOrder(TreeNode root) {
+        //at level n, there would be 2^{n-1} nodes.
+        List<List<Integer>> output = new ArrayList<>();
+        if (root == null) return output;
+        
+        //perform BFS, need a queue
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        
+        while (queue.isEmpty() == false){
+            List<Integer> currentLevel = new ArrayList<>();
+            int currsize = queue.size();
+            for(int i = 0; i < currsize; i++){
+                TreeNode curr = queue.remove();
+                currentLevel.add(curr.val);
+                if(curr.left != null){
+                    queue.add(curr.left);
+                }
+                if(curr.right != null){
+                    queue.add(curr.right);
+                }
+            }
+            output.add(currentLevel);
+            
+        }
+        return output;
+        
+    }
+```
+
+## Solve Problems recursively
