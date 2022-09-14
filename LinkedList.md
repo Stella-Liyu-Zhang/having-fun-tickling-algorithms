@@ -104,3 +104,27 @@ Wasn't too bad for implementation of the algorithm. Some points needed to be spe
   - Delete first, delete last, delete at index
   - 3 scenatios:
 - size --!!!
+
+## Two-Pointer in Linked List
+
+Let's start with a classic problem:
+
+> Given a linked list, determine if it has a cycle in it.
+
+That's exactly what we will come across using two pointers with different speed in a linked list:
+
+- If there is no cycle, the fast pointer will stop at the end of the linked list.
+- If there is a cycle, the fast pointer will eventually meet with the slow pointer.
+
+So the only remaining problem is:
+
+> What should be the proper speed for the two pointers?
+
+It is a safe choice to move the slow pointer one step at a time while moving the fast pointer two steps at a time. For each iteration, the fast pointer will move one extra step. If the length of the cycle is M, after M iterations, the fast pointer will definitely move one more cycle and catch up with the slow pointer.
+
+## 141. Linked List Cycle
+
+- If there is no cycle, the fast pointer will stop at the end of the linked list.
+- If there is a cycle, the fast pointer will eventually meet with the slow pointer.
+
+if slow == fast ultimately, then we will return true!
