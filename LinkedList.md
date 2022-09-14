@@ -1,0 +1,106 @@
+# LinkedList
+
+Similar to the array, the linked list is also a linear data structure.
+
+As you can see, each element in the linked list is actually a separate object while all the objects are linked together by the reference field in each element.
+
+There are two types of linked list: singly linked list and doubly linked list.
+
+### Here is the typical definition of a node in a singly-linked list:
+
+```java
+// Definition for singly-linked list.
+public class SinglyListNode {
+    int val;
+    SinglyListNode next;
+    SinglyListNode(int x) { val = x; }
+}
+```
+
+## Add operation
+
+If we want to add a new value after a given node prev, we should:
+
+1. Initialize a new node cur with the given value;
+2. Link the "next" field of cur to prev's next node next;
+3. Link the "next" field in prev to cur.
+
+Unlike an array, we don’t need to move all elements past the inserted element. Therefore, you can insert a new node into a linked list in O(1) time complexity, which is very efficient.
+
+For instance,
+![](assets/screen-shot-2018-04-12-at-152754.png)
+Let's insert a new value 9 after the second node 6.
+
+We will first initialize a new node with value 9. Then link node 9 to node 15. Finally, link node 6 to node 9.
+
+After insertion, our linked list will look like this:
+![](assets/screen-shot-2018-04-12-at-154238.png)
+
+## Add a Node at the Beginning
+
+As we know, we use the head node head to represent the whole list.
+
+So it is essential to update head when adding a new node at the beginning of the list.
+
+1. Initialize a new node cur
+2. Link the new node to our original head node head.
+3. Assign cur to head.
+
+For example, let's add a new node 9 at the beginning of the list.
+
+1. We initialize a new node 9 and link node 9 to current head node 23.
+   ![](assets/screen-shot-2018-04-19-at-125118.png)
+2. Assign node 9 to be our new head.
+   ![](assets/screen-shot-2018-04-19-at-125350.png)
+
+## Delete Operation - Singly Linked List
+
+If we want to delete an existing node cur from the singly linked list, we can do it in two steps:
+
+1. Find cur's previous node prev and its next node next;
+   ![](assets/screen-shot-2018-04-26-at-203558.png)
+2. Link prev to cur's next node next.
+   ![](assets/screen-shot-2018-04-26-at-203640.png)
+
+In our first step, we need to find out prev and next. It is easy to find out next using the reference field of cur. However, we have to traverse the linked list from the head node to find out prev which will take O(N) time on average, where N is the length of the linked list. So the time complexity of deleting a node will be O(N).
+
+The space complexity is O(1) because we only need constant space to store our pointers.
+
+### Example
+
+Let's try to delete node 6 from the singly linked list above.
+
+1. Traverse the linked list from the head until we find the previous node prev which is node 23
+
+2. Link prev (node 23) with next (node 15)
+
+Node 6 is not in our singly linked list now.
+
+### Delete the First Node
+
+As we mentioned before, we use the head node head to represent a linked list. Our head is the black node 23 in the example below.
+
+If we want to delete the first node, we can simply assign the next node to head. That is to say, our head will be node 6 after deletion.
+
+The linked list begins at the head node, so node 23 is no longer in our linked list.
+
+### 707. Design Linked List
+
+Wasn't too bad for implementation of the algorithm. Some points needed to be specified here:
+
+- check boundaries at first
+
+```java
+    if (index < 0 || index >= this.size) {
+            return -1;
+    }
+```
+
+- getNodeAt() helper function to get the node at specific index
+- For all the add functions,
+  - Add at head, add at tail, add at index
+  - 2 scenarios: `size == 0` and else
+- For all the delete functions,
+  - Delete first, delete last, delete at index
+  - 3 scenatios:
+- size --!!!
