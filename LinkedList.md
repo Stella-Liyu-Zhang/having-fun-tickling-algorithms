@@ -146,3 +146,12 @@ At the same time, according to the definition of x, head will also reach the sta
 so if head and slow start to move at the same time, they will meet at the start of the cycle, that is the answer.
 
 > Time Complexity: O(N), Space Complexity: O(1)
+
+## 160. Intersection of Two Linked Lists
+
+O(n) time O(1) space
+Just to make multiple loops until they meet
+
+If headA reaches the end, make it the head of the other LinkedList
+If headB reaches the end, make it the head of the LinkedListA.
+From here, they will loop ahead and ultimately meet each other somewhere.
