@@ -155,3 +155,48 @@ Just to make multiple loops until they meet
 If headA reaches the end, make it the head of the other LinkedList
 If headB reaches the end, make it the head of the LinkedListA.
 From here, they will loop ahead and ultimately meet each other somewhere.
+
+## Summary of 2-pointers problems
+
+Here's the template：
+
+```java
+// Initialize slow & fast pointers
+ListNode slow = head;
+ListNode fast = head;
+/**
+ * Change this condition to fit specific problem.
+ * Attention: remember to avoid null-pointer error
+ **/
+while (slow != null && fast != null && fast.next != null) {
+    slow = slow.next;           // move slow pointer one step each time
+    fast = fast.next.next;      // move fast pointer two steps each time
+    if (slow == fast) {         // change this condition to fit specific problem
+        return true;
+    }
+}
+return false;   // change return value to fit specific problem
+```
+
+## Complexity Analysis
+
+It is easy to analyze the space complexity. If you only use pointers without any other extra space, the space complexity will be O(1). However, it is more difficult to analyze the time complexity. In order to get the answer, we need to analyze how many times we will run our loop .
+
+In our previous finding cycle example, let's assume that we move the faster pointer 2 steps each time and move the slower pointer 1 step each time.
+
+If there is no cycle, the fast pointer takes N/2 times to reach the end of the linked list, where N is the length of the linked list.
+
+If there is a cycle, the fast pointer needs M times to catch up the slower pointer, where M is the length of the cycle in the list.
+
+Obviously, M <= N. So we will run the loop up to N times. And for each loop, we only need constant time. So, the time complexity of this algorithm is O(N) in total.
+
+## 206. Reverse Linked List
+
+We proceed by recursive method.
+
+```java
+ ListNode next_node = head.next;
+            head.next = prev;
+            prev = head;
+            head = next_node;
+```
