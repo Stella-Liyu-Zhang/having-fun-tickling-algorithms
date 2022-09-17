@@ -208,3 +208,59 @@ We proceed by recursive method.
 Time complexity : O(n)O(n). There are total nn nodes and we visit each node once.
 
 Space complexity : O(1)O(1). All we need is the four pointers.
+
+## Introduction - Doubly Linked List
+
+The doubly linked list works in a similar way but has one more reference field which is known as the "prev" field. With this extra field, you are able to know the previous node of the current node.
+
+Let's take a look at an example:
+![](assets/screen-shot-2018-04-17-at-161130.png)
+
+Here is a typical definition of the node structure in a doubly linked list:
+
+```java
+class DoublyListNode {
+    int val;
+    DoublyListNode next, prev;
+    DoublyListNode(int x) {val = x;}
+}
+```
+
+Similar to the singly linked list, we will use the head node to represent the whole list.
+
+### Operations
+
+We can access data in the same exact way as in a singly linked list:
+
+- We are not able to access a random position in constant time.
+- We have to traverse from the head to get the i-th node we want.
+- The time complexity in the worse case will be O(N), where N is the length of the linked list.
+
+### Add Operation - Doubly Linked List
+
+If we want to insert a new node cur after an existing node prev, we can divide this process into two steps:
+
+1. link cur with prev and next, where next is the original next node of prev;
+2. re-link the prev and next with cur.
+
+Similar to the singly linked list, both the time and the space complexity of the add operation are O(1).
+
+### Delete Operation
+
+we can simply link its previous node prev with its next node next. Since we no longer need to traverse the linked list to get the previous node, both the time and space complexity are O(1).
+
+## Summary - Linked List
+
+They are similar in many operations:
+
+1. Both of them are not able to access the data at a random position in constant time.
+2. Both of them can add a new node after given node or at the beginning of the list in O(1) time.
+3. Both of them can delete the first node in O(1) time.
+
+![](assets/comparison_of_time_complexity.png)
+
+After this comparison, it is not difficult to come up with our conclusion:
+
+> If you need to add or delete a node frequently, a linked list could be a good choice.
+
+> If you need to access an element by index often, an array might be a better choice than a linked list.
