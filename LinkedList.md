@@ -200,3 +200,11 @@ We proceed by recursive method.
             prev = head;
             head = next_node;
 ```
+
+## 328. Odd Even Linked List
+
+![](assets/328_Odd_Even.svg)
+
+Time complexity : O(n)O(n). There are total nn nodes and we visit each node once.
+
+Space complexity : O(1)O(1). All we need is the four pointers.
