@@ -264,3 +264,17 @@ After this comparison, it is not difficult to come up with our conclusion:
 > If you need to add or delete a node frequently, a linked list could be a good choice.
 
 > If you need to access an element by index often, an array might be a better choice than a linked list.
+
+## 2. Add Two Numbers
+
+Initialize current node to dummy head of the returning list.
+
+- Initialize carry to 00.
+- Loop through lists l1l1 and l2l2 until you reach both ends and crarry is 00.
+  - Set xx to node l1l1's value. If l1l1 has reached the end of l1l1, set to 00.
+  - Set yy to node l2l2's value. If l2l2 has reached the end of l2l2, set to 00.
+  - Set sum = x + y + carrysum=x+y+carry.
+  - Update carry = sum / 10carry=sum/10.
+  - Create a new node with the digit value of (sum \bmod 10)(summod10) and set it to current node's next, then advance current node to next.
+  - Advance both l1l1 and l2l2.
+- Return dummy head's next node.
