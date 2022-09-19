@@ -278,3 +278,18 @@ Initialize current node to dummy head of the returning list.
   - Create a new node with the digit value of (sum \bmod 10)(summod10) and set it to current node's next, then advance current node to next.
   - Advance both l1l1 and l2l2.
 - Return dummy head's next node.
+
+## 61. Rotate List
+
+Since n may be a large number compared to the length of list. So we need to know the length of linked list.
+After that, move the list after the (l-n%l )th node to the front to finish the rotation.
+
+Ex: {1,2,3} k=2 Move the list after the 1st node to the front
+
+Ex: {1,2,3} k=5, In this case Move the list after (3-5%3=1)st node to the front.
+
+Algorithm:
+
+- Get the length
+- Define the cutpoint to be the (length-n%length)th node
+- Rotate the lists (the list before the cutpoint, and started from the cutpoint.)
