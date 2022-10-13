@@ -1,29 +1,30 @@
 class Solution {
+    // BFS
     public int numIslands(char[][] grid) {
-        // DFS
-        // Find connected components in graph
+        // Use DFS to find only vertical or horizontal connections, diagonals don't
+        // count
+        // Then turn the 1s into 0s whenever it's visited
         int count = 0;
-
         for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                // if we see a "1", find the whole island structure of the 1.
+            for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == '1') {
-                    count += 1; // we found an island, so we increment count by 1;
-                    callDFS(grid, i, j);
+                    count++;
+                    DFS(i, j, grid);
                 }
             }
         }
         return count;
     }
 
-    public void callDFS(char[][] grid, int i, int j) {
-        if (i < 0 || i >= grid.length || j < 0 || j >= grid[i].length || grid[i][j] == '0') {
+    public void DFS(int i, int j, char[][] grid) {
+        if (i >= grid.length || i < 0 || j >= grid[0].length || j < 0 || grid[i][j] == '0') {
             return;
         }
         grid[i][j] = '0';
-        callDFS(grid, i + 1, j);
-        callDFS(grid, i - 1, j);
-        callDFS(grid, i, j + 1);
-        callDFS(grid, i, j - 1);
+        DFS(i - 1, j, grid); // down
+        DFS(i + 1, j, grid); // up
+        DFS(i, j + 1, grid);
+        DFS(i, j - 1, grid);
     }
+
 }
