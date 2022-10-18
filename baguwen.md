@@ -1,45 +1,8 @@
+## API
+
 Similarly, an API lists a bunch of operations that developers can use, along with a description of what they do. The developer doesn’t necessarily need to know how, for example, an operating system builds and presents a “Save As” dialog box. They just need to know that it’s available for use in their app.
 
-[NEED IT IN PYTHON]
-
-Q1.You are running a classroom and suspect that some of your students are passing around the answer to a multiple-choice question disguised as a random string.
-
-Your task is to write a function that, given a list of words and a string, finds and returns the word in the list that is scrambled inside the string, if any exists. If none exist, it returns the result "-" as a string. There will be at most one matching word. The letters don't need to be in order or next to each other. The letters cannot be reused.
-
-Example:  
-words = ["baby", "referee", "cat", "dada", "dog", "bird", "ax"]
-string1 = "ctay"
-find(words, string1) => "cat" (the letters do not have to be in order)
-
-string2 = "bcanihjsrrrferet"
-find(words, string2) => "cat" (the letters do not have to be together)
-
-string3 = "tbaykkjlga"
-find(words, string3) => "-" (the letters cannot be reused)
-
-string4 = "bbbblkkjbaby"
-find(words, string4) => "baby"
-
-string5 = "dad"
-find(words, string5) => "-"
-
-string6 = "breadmaking"
-find(words, string6) => "bird"
-
-All Test Cases: <br>
-find(words, string1) -> "cat" <br>
-find(words, string2) -> "cat" <br>
-find(words, string3) -> "-" <br>
-find(words, string4) -> "baby" <br>
-find(words, string5) -> "-" <br>
-find(words, string6) -> "bird" <br>
-
-Complexity analysis variables:
-
-W = number of words in `words`  
-S = maximal length of each word or string
-
-q2.
+## h
 
 After catching your classroom students cheating before, you realize your students are
 getting craftier and hiding words in 2D grids of letters. The word may start anywhere in the grid,
@@ -90,6 +53,7 @@ Q2.)
 
 # Here is the find_word_location() function
 
+```py
 def find_word_location(grid1, word1): # k variable for indexing in the word string
 k = 0 # row list stores the row indexes
 rowList = [] # column list stores the column indexes
@@ -151,6 +115,7 @@ Coordinates:
 [(0, 0), (0, 4), (1, 3), (1, 4), (3, 2), (3, 4)]
 [(0, 0), (0, 1), (1, 0), (1, 1)]
 [(0,
+```
 
 Explanation:
 
