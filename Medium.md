@@ -4,6 +4,9 @@
 - [22. Generate Parentheses](#22-generate-parentheses)
   - [Approach 1: Backtracking](#approach-1-backtracking)
   - [Approach 2: DP](#approach-2-dp)
+- [15. 3Sum](#15-3sum)
+  - [Approach 1: Two-pointers](#approach-1-two-pointers)
+  - [Approach 2: Hashset + two-pointers](#approach-2-hashset--two-pointers)
 
 ## 22. Generate Parentheses
 
@@ -87,12 +90,83 @@ public class Solution
 }
 ```
 
-##
+## 15. 3Sum
 
-Approach 1:
+### Approach 1: Two-pointers
+
+for each arr[i], look at the rest of the array to see if there is a pair.
+
+> Idea: [-1,0,1,2,-1,-4]
+> Loop through the sorted array,
+> Look at -1, check if there are a pair of ints in the rest of the array that addes up to 1, then look at 2, check if there is a pair of ints ....
+
+- Time complexity : O(n^2)
+- Space complexity : O(n^2)
+
+```java
+ public List<List<Integer>> threeSum(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> output = new LinkedList();
+
+        for(int i = 0; i < nums.length - 2; i++){
+            if (i == 0 || i > 0 && nums[i] != nums[i-1]){
+                int sum = 0 - nums[i];
+                int left = i+1;
+                int right = nums.length - 1;
+
+                while (left < right){
+                    if (nums[left] + nums[right] == sum){
+                        output.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                        while(left < right && nums[left] == nums[left+1]){
+                            left ++;
+                        }
+                        while(left < right && nums[right] == nums[right-1]){
+                            right --;
+                        }
+                        left ++;
+                        right --;
+                    }else if(nums[left] + nums[right] > sum){
+                        right --;
+                    }else{
+                        left ++;
+                    }
+                }
+            }
+        }
+        return output;
+    }
+```
+
+### Approach 2: Hashset + two-pointers
 
 ```java
 
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        Set<List<Integer>> set = new HashSet<>();
+        if(nums.length == 0){
+            return new ArrayList<>(set);
+        }
+        Arrays.sort(nums);
+
+        for(int i = 0; i < nums.length; i ++){
+            int left = i+1, right = nums.length - 1;
+            while (left < right){
+                int sum = nums[i] + nums[right]+nums[left];
+                if (sum == 0){
+                    set.add(Arrays.asList(nums[i], nums[right], nums[left]));
+                    left ++;
+                    right --;
+                }else if (sum < 0){
+                    left ++;
+                }else if (sum > 0){
+                    right --;
+                }
+            }
+        }
+        return new ArrayList<>(set);
+    }
+}
 ```
 
 ##
