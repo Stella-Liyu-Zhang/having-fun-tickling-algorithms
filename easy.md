@@ -176,6 +176,117 @@ class Solution {
 }
 ```
 
+## 160. Intersection of Two Linked Lists
+
+Approach 1: Intersection: keep track of what we already have seen
+keep track one of the list, then go to the other list to see if we have seen it before
+
+Throw one list into a hashset, record it is b1, b2, in our hashset
+
+Time: O(m+n)
+Space: visited allocated, O(min(m,n))
+O(n) in general
+
+```java
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        HashSet<ListNode> visited = new HashSet<>();
+        while(headA != null){
+            visited.add(headA);
+            headA = headA.next;
+        }
+
+        while (headB != null){
+            if (visited.contains(headB)){
+                return headB;
+            }
+            headB = headB.next;
+        }
+        return null;
+    }
+}
+```
+
+## Approach 2:
+
+1. Traverse the shorter one and longer one at the same time, set to the header of the other one pointer to the head,
+   > "hey nodeB I will chase you till the day I meet you"
+
+Time: O(m+n)
+Space: constant
+
+```java
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) return null;
+
+        ListNode pointerA = headA;
+        ListNode pointerB = headB;
+
+        while (pointerA != pointerB){
+            if(pointerA == null){
+                pointerA = headA;
+            }else{
+                pointerA = pointerA.next;
+            }
+            if(pointerB == null){
+                pointerB = headB;
+            }else{
+                pointerB = pointerB.next;
+            }
+        }
+
+        return pointerA;
+    }
+```
+
+## Approach 3:
+
+Calcualte length, wait for the shorter to catch up, and get the intersection
+
+## 257. Binary Tree Paths
+
+DFS, recursions
+
+one gets added to the string, left node gets passed in if it's not null, right same logic.
+Time: O(n)
+Space: O(n)
+
+```java
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> ans = new ArrayList<>();
+
+        if(root == null) return ans;
+        String currpath = Integer.toString(root.val);
+
+        if(root.left == null && root.right == null){
+            ans.add(currpath);
+        }
+        if(root.left != null){
+            dfs(root.left, currpath, ans);
+        }
+        if(root.right != null){
+            dfs(root.right, currpath, ans);
+        }
+        return ans;
+    }
+
+    public void dfs(TreeNode root, String currpath, List<String> list){
+        currpath += "->" +root.val;
+        if (root.left == null && root.right == null){
+            list.add(currpath);
+            return;
+        }
+        if(root.left != null){
+            dfs(root.left, currpath, list);
+        }
+        if(root.right != null){
+            dfs(root.right, currpath, list);
+        }
+    }
+}
+```
+
 ## 206. Reverse Linked List
 
 Approach 1: Stack, O(n)
@@ -202,12 +313,6 @@ Approach 1: Stack, O(n)
 ```
 
 Approach 2: constant time operation
-
-```java
-
-```
-
-## 257. Binary Tree Paths
 
 ```java
 
