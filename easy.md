@@ -1,3 +1,17 @@
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [21. Merge Two Sorted Lists](#21-merge-two-sorted-lists)
+  - [Followup: 23. Merge k Sorted Lists](#followup-23-merge-k-sorted-lists)
+- [20. Valid Parentheses](#20-valid-parentheses)
+- [1. Two Sum](#1-two-sum)
+- [9. Palindrome Number](#9-palindrome-number)
+- [242. Valid Anagram](#242-valid-anagram)
+- [387. First Unique Character in a String](#387-first-unique-character-in-a-string)
+- [160. Intersection of Two Linked Lists](#160-intersection-of-two-linked-lists)
+- [257. Binary Tree Paths](#257-binary-tree-paths)
+- [206. Reverse Linked List](#206-reverse-linked-list)
+
 ## 21. Merge Two Sorted Lists
 
 > O(n1+n2) recursive stack space, where n1-length of LL1 and n2-length of LL2
@@ -40,9 +54,7 @@ class Solution {
             return dummy.next;
 ```
 
-### Followup:
-
-23. Merge k Sorted Lists
+### Followup: 23. Merge k Sorted Lists
 
 ## 20. Valid Parentheses
 
@@ -178,7 +190,9 @@ class Solution {
 
 ## 160. Intersection of Two Linked Lists
 
-Approach 1: Intersection: keep track of what we already have seen
+Approach 1:
+
+Intersection: keep track of what we already have seen
 keep track one of the list, then go to the other list to see if we have seen it before
 
 Throw one list into a hashset, record it is b1, b2, in our hashset
@@ -207,7 +221,7 @@ public class Solution {
 }
 ```
 
-## Approach 2:
+Approach 2:
 
 1. Traverse the shorter one and longer one at the same time, set to the header of the other one pointer to the head,
    > "hey nodeB I will chase you till the day I meet you"
@@ -239,7 +253,7 @@ Space: constant
     }
 ```
 
-## Approach 3:
+Approach 3:
 
 Calcualte length, wait for the shorter to catch up, and get the intersection
 
@@ -313,12 +327,6 @@ Approach 1: Stack, O(n)
 ```
 
 Approach 2: constant time operation
-
-```java
-
-```
-
-## 160. Intersection of Two Linked Lists
 
 ```java
 
