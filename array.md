@@ -306,3 +306,7 @@ for(int i = bottom; i >= top; i--) res.add(matrix[i][left]);
 ```java
         return new String(sArray);
 ```
+
+## Get a subarray of an array
+
+Arrays.copyOfRange(Object[] src, int from, int to)
