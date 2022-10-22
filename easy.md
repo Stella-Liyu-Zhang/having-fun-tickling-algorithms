@@ -10,6 +10,9 @@
 - [387. First Unique Character in a String](#387-first-unique-character-in-a-string)
 - [160. Intersection of Two Linked Lists](#160-intersection-of-two-linked-lists)
 - [257. Binary Tree Paths](#257-binary-tree-paths)
+- [155. Min Stack](#155-min-stack)
+  - [Approach 1: Double stack](#approach-1-double-stack)
+  - [Approach 2: Use Node to represent](#approach-2-use-node-to-represent)
 - [206. Reverse Linked List](#206-reverse-linked-list)
 
 ## 21. Merge Two Sorted Lists
@@ -299,6 +302,97 @@ class Solution {
         }
     }
 }
+```
+
+## 155. Min Stack
+
+### Approach 1: Double stack
+
+- Time complexity: O(1)
+- Space complexity: O(n+k), where k is the mins needed to be stored.
+
+```java
+class MinStack {
+    Stack<Integer> stack;
+    Stack<Integer> minStack;
+
+    public MinStack() {
+        stack = new Stack();
+        minStack = new Stack();
+    }
+    public void push(int val) {
+        if(minStack.isEmpty() || val <= minStack.peek()){
+            minStack.push(val);
+        }
+        stack.push(val);
+    }
+
+    public void pop() {
+        if(minStack.peek().equals(stack.peek())) minStack.pop();
+        stack.pop();
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int getMin() {
+        return minStack.peek();
+    }
+}
+```
+
+### Approach 2: Use Node to represent
+
+- Time complexity: O(1)
+- Space complexity: O(2N)
+
+Each node stores 2 ints, val and min. There are N nodes, thus 2N. vs other solutions N+K memory complexity, where K is when min needs to be stored.
+
+> Need to see that we are getting the minimum between the current value and head's minimum. And we are setting the previous head to the next.
+
+```java
+
+class MinStack {
+    private Node head;
+
+    public MinStack() {
+        this.head = head;
+    }
+
+    public void push(int val) {
+        if (head == null){
+            head = new Node(val, val, null);
+        }else{
+            head = new Node(val, Math.min(head.min, val), head);
+        }
+    }
+
+    public void pop() {
+        head = head.next;
+    }
+
+    public int top() {
+        return head.val;
+    }
+
+    public int getMin() {
+        return head.min;
+    }
+
+   private class Node {
+        int val;
+        int min;
+        Node next;
+
+        private Node(int val, int min, Node next) {
+            this.val = val;
+            this.min = min;
+            this.next = next;
+        }
+    }
+}
+
 ```
 
 ## 206. Reverse Linked List

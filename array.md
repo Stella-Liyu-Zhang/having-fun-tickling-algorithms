@@ -304,9 +304,11 @@ for(int i = bottom; i >= top; i--) res.add(matrix[i][left]);
 ## Array of characters to string:
 
 ```java
-        return new String(sArray);
+return new String(sArray);
 ```
 
 ## Get a subarray of an array
 
+```java
 Arrays.copyOfRange(Object[] src, int from, int to)
+```
