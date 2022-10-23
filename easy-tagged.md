@@ -1,6 +1,5 @@
-## Table of Contents
+**Table of Contents**
 
-- [Table of Contents](#table-of-contents)
 - [21. Merge Two Sorted Lists](#21-merge-two-sorted-lists)
   - [Followup: 23. Merge k Sorted Lists](#followup-23-merge-k-sorted-lists)
 - [20. Valid Parentheses](#20-valid-parentheses)
@@ -9,11 +8,16 @@
 - [242. Valid Anagram](#242-valid-anagram)
 - [387. First Unique Character in a String](#387-first-unique-character-in-a-string)
 - [160. Intersection of Two Linked Lists](#160-intersection-of-two-linked-lists)
+  - [Approach 1: Visited Hashset](#approach-1-visited-hashset)
+  - [Approach 2: A strange loop until two meets](#approach-2-a-strange-loop-until-two-meets)
 - [257. Binary Tree Paths](#257-binary-tree-paths)
 - [155. Min Stack](#155-min-stack)
   - [Approach 1: Double stack](#approach-1-double-stack)
   - [Approach 2: Use Node to represent](#approach-2-use-node-to-represent)
 - [206. Reverse Linked List](#206-reverse-linked-list)
+  - [Approach 1: Stack](#approach-1-stack)
+  - [Approach 2: Iteratively reverse it by changing the pointers](#approach-2-iteratively-reverse-it-by-changing-the-pointers)
+  - [Approach 3: Recursive approach](#approach-3-recursive-approach)
 
 ## 21. Merge Two Sorted Lists
 
@@ -193,7 +197,7 @@ class Solution {
 
 ## 160. Intersection of Two Linked Lists
 
-Approach 1:
+### Approach 1: Visited Hashset
 
 Intersection: keep track of what we already have seen
 keep track one of the list, then go to the other list to see if we have seen it before
@@ -224,7 +228,7 @@ public class Solution {
 }
 ```
 
-Approach 2:
+### Approach 2: A strange loop until two meets
 
 1. Traverse the shorter one and longer one at the same time, set to the header of the other one pointer to the head,
    > "hey nodeB I will chase you till the day I meet you"
@@ -397,7 +401,12 @@ class MinStack {
 
 ## 206. Reverse Linked List
 
-Approach 1: Stack, O(n)
+### Approach 1: Stack
+
+> Since stack is a FILO data structure, we only need to push everything onto it, and then pop them one by one and chain them together into a new LinkedList.
+
+- Time complexity: O(n)
+- Space comlexity: O(n)
 
 ```java
  public ListNode reverseList(ListNode head) {
@@ -420,8 +429,50 @@ Approach 1: Stack, O(n)
     }
 ```
 
-Approach 2: constant time operation
+### Approach 2: Iteratively reverse it by changing the pointers
+
+> Make a newhead.
+>
+> First store the value of head.next into ListNode next
+>
+> Make head points to the newHead
+>
+> turn newHead into head, then turn head into the next.
+> So it will become the next pointing to the head
+
+> **Note**: Note that if we switch and make turning head into next first, then next will point to newhead, it will fail.
+
+- Time: O(n)
+- Space: O(1)
 
 ```java
+  public ListNode reverseList(ListNode head) {
+        ListNode newHead = null;
+        while (head != null){
+            ListNode next = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = next;
+        }
+        return newHead;
+    }
+```
 
+### Approach 3: Recursive approach
+
+- Time complexity: O(n)
+- Space complexity: O(n) -> cost made by Recursive calls
+
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        return reverseList(head, null);
+    }
+    private ListNode reverseList(ListNode head, ListNode newHead){
+        if(head == null) return newHead;
+        ListNode next = head.next;
+        head.next = newHead;
+        return reverseList(next, head);
+    }
+}
 ```
