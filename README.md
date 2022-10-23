@@ -2,8 +2,15 @@
 
 ## Table of Contents
 
-- [Easy questions](easy.md)
-- [Medium questions](Medium.md)
+Questions by difficulties
+
+- [Easy Tagged questions](easy-tagged.md)
+  - [Easy Non-tagged quesetions](easy-non-tagged.md)
+- [Medium questions](Medium-tagged.md)
+  - [Medium Non-tagged questions](Medium-nontagged.md)
+
+Topic-related notes
+
 - [Math questions](math.md)
 - [General stuff to remember](general%20stuff%20to%20remember.md)
 - [Sorting algorithm](Sort.md)
