@@ -26,7 +26,7 @@ return max(root.value, leftPath, rightPath);
 ```
 
 - Time: O(N), since it's a post-order traversal
-- Space:
+- Space: O(1), if we do not consider the stack size for function calls. Otherwise, the space complexity of postorder traversal is O(h), where 'h' is the height of tree.
 
 ```java
 class Solution {
@@ -60,3 +60,8 @@ class Solution {
     }
 }
 ```
+
+> Complexity of Postorder traversal
+> The time complexity of postorder traversal is O(n), where 'n' is the size of binary tree.
+
+> Whereas, the space complexity of postorder traversal is O(1), if we do not consider the stack size for function calls. Otherwise, the space complexity of postorder traversal is O(h), where 'h' is the height of tree.
