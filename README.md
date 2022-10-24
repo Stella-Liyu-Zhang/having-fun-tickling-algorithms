@@ -8,6 +8,7 @@ Questions by difficulties
   - [Easy Non-tagged quesetions](easy-non-tagged.md)
 - [Medium questions](Medium-tagged.md)
   - [Medium Non-tagged questions](Medium-nontagged.md)
+- [Hard questions](Hard.md)
 
 Topic-related notes
 
