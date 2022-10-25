@@ -4,6 +4,7 @@
 - [234. Palindrome Linked List](#234-palindrome-linked-list)
 - [36. Valid Sudoku](#36-valid-sudoku)
   - [Approach 1: Use 1 hashset](#approach-1-use-1-hashset)
+- [1300. Sum of Mutated Array Closest to Target](#1300-sum-of-mutated-array-closest-to-target)
 
 ## 7. Reverse Integer
 
@@ -63,4 +64,18 @@ class Solution {
 
 ```
 
-##
+## 1300. Sum of Mutated Array Closest to Target
+
+> Low ends up becoming is the minimum value that satisfies sum(arr,mid) >= target.
+>
+> - This means that the two best choices are either low or low - 1, where
+>   - low is the closest value that gets you a sum greater than or equal to the target
+>   - low - 1 is the closest value that gets you a sum less than the target.
+> - Then, all you have to do is see which calculated sum is closest to the target.
+
+- Time:
+- Space:
+
+```java
+
+```

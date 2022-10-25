@@ -7,6 +7,12 @@
 - [15. 3Sum](#15-3sum)
   - [Approach 1: Two-pointers](#approach-1-two-pointers)
   - [Approach 2: Hashset + two-pointers](#approach-2-hashset--two-pointers)
+- [451. Sort Characters By Frequency](#451-sort-characters-by-frequency)
+  - [Approach 1: MaxHeap (priority queue)](#approach-1-maxheap-priority-queue)
+  - [Approach 2: array indexing](#approach-2-array-indexing)
+- [347. Top K Frequent Elements](#347-top-k-frequent-elements)
+  - [Approach 1: MaxHeap (priority queue)](#approach-1-maxheap-priority-queue-1)
+  - [Approach 2: MinHeap](#approach-2-minheap)
 
 ## 22. Generate Parentheses
 
@@ -169,19 +175,90 @@ class Solution {
 }
 ```
 
-##
+## 451. Sort Characters By Frequency
 
-Approach 1:
+### Approach 1: MaxHeap (priority queue)
+
+- Time: O(n) + K\*log(k)
+  - Traverse each character of the string. That is O(n). n is the length of string.
+  - Populate the heap with k distinct characters of the string. This klog(k). k is the number of distinct characters of the string. For example, "tree" is k is 3.
+  - Append each character of the string. (k distinct characters _ the frequency) . That is O(n).
+    So the total time complexity is 2 _ O(n) + K*log(k) = O(n) + K*log(k)
+- Space: O(n)
 
 ```java
+class Solution {
+    public String frequencySort(String s) {
+        HashMap<Character, Integer> map = new HashMap();
+        char[] chars = s.toCharArray();
+        for(char c: chars){
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        //max heap building
+        PriorityQueue<Character> maxHeap = new PriorityQueue<>((a, b) -> map.get(b) - map.get(a));
+        maxHeap.addAll(map.keySet());
+        StringBuilder sb = new StringBuilder();
+        //loop through the maxHeap
+        while(maxHeap.isEmpty() == false){
+            char curr = maxHeap.remove();
+            for(int i = 0; i < map.get(curr); i ++){
+                sb.append(curr);
+            }
+        }
 
+        return sb.toString();
+    }
+}
 ```
 
-##
+### Approach 2: array indexing
 
-Approach 1:
+- Build a map of characters to the number of times it occurs in the string
+- Create an array where the index of the array represents how many times that character occurred in the String
+- Iterate from the end of the array to the beginning, and at each index, append each character to the return string that number of times.
+- Time: O(n)
+
+## 347. Top K Frequent Elements
+
+### Approach 1: MaxHeap (priority queue)
+
+use maxHeap. Put entry into maxHeap so we can always poll a number with largest frequency
+It is n[log n] because on a worst case if none of element repeat in input, you can have all the elements in heap. so, i.e all the 'n' elements are in the heap.
+
+- Time: `O(NlogK)`, since we do not need to insert to min heap n times, just k times. And poll() is `O(1).`
+
+- Space: `O(n + k)`
 
 ```java
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Arrays.sort(nums);
+        HashMap<Integer, Integer> map = new HashMap();
+        for(int i = 0; i < nums.length; i ++){
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+
+        //max heap
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> map.get(b) - map.get(a));
+        maxHeap.addAll(map.keySet());
+
+        int[]output = new int[k];
+        while(!maxHeap.isEmpty() && k - 1 >= 0){
+            int curr = maxHeap.remove();
+            output[k-1] = curr; //k-1 -> 0
+            k--;
+        }
+        return output;
+    }
+}
+```
+
+### Approach 2: MinHeap
+
+so that the heap size can be maintained <= k.
+
+```java
+
 
 ```
 

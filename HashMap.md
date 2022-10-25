@@ -112,3 +112,22 @@ long solution(String[] queryType, int[][] query) {
 }
 
 ```
+
+## Sort a Hashmap according to the key
+
+```java
+  // TreeMap to store values of HashMap
+  TreeMap<String, Integer> sorted = new TreeMap<>();
+
+  // Copy all data from hashMap into TreeMap
+  sorted.putAll(map);
+
+  // Display the TreeMap which is naturally sorted
+  for (Map.Entry<String, Integer> entry : sorted.entrySet())
+  System.out.println("Key = " + entry.getKey() +", Value = " + entry.getValue());
+
+```
+
+## Sort a Hashmap according to the value
+
+## Sort a hashmap according to values -descending order
