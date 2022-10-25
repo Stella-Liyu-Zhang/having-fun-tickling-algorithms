@@ -21,3 +21,87 @@ class Solution {
     }
 }
 ```
+
+## 234. Palindrome Linked List
+
+### Approach 1: reverse the second half of the list, then compare with the first half
+
+> - Define a fast pointer and a slow pointer
+> - Make the slow pointer move till the middle,
+> - reverse slow.next
+> - Firsthalf pointing at the head, secondhalf pointing at reverse(slow.next)
+> - Check each element on the 1/2 and 1/2 of the linkedlists , to see if they are the same.
+
+- Time: O(1.5n)
+- Space: O(1.5n) = O(n)
+
+```java
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) return true;
+        //fast and slow pointers:
+        ListNode fast = head, slow = head;
+        while (fast.next != null && fast.next.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        ListNode secondHalf = reverse(slow.next);
+        ListNode firstHalf = head;
+        //check if fast and "slow -> fast" parts are the same
+        while(firstHalf != null && secondHalf != null){
+            if(firstHalf.val != secondHalf.val) return false;
+            secondHalf = secondHalf.next;
+            firstHalf = firstHalf.next;
+        }
+        return true;
+    }
+
+    public ListNode reverse(ListNode head){
+        ListNode newHead = null;
+        while (head != null){
+            ListNode next = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = next;
+        }
+        return newHead;
+    }
+}
+```
+
+### Approach 2: Recursive
+
+- Time: O(n)
+- Space: O(n). Because in recursion methods, And the height of the stack is based on the number of nodes. So it use linear space.
+
+```
+Example :
+1-> 2-> 3-> 4-> 2-> 1
+
+ref points 1 initially.
+Make recursive calls until you reach the last element - 1.
+On returning from each recurssion, check if it is equal to ref values.
+ref values are updated to on each recurssion.
+So first check is ref 1 -  end 1
+Second ref 2 - second last 2 ...and so on.
+
+```
+
+```java
+class Solution {
+    ListNode ref;
+    public boolean isPalindrome(ListNode head) {
+        ref = head;
+        return check(head);
+    }
+
+    public boolean check(ListNode node){
+        if(node == null) return true;
+        boolean ans = check(node.next);
+        boolean isEqual = (ref.val == node.val)? true : false;
+        ref = ref.next;
+        return ans && isEqual;
+    }
+}
+
+```
