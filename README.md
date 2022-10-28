@@ -27,3 +27,13 @@ Topic-related notes
 - [Queue and Stack](StackandQueue.md)
 - [Dynamic Programming](dynamicprogramming.md)
 - [Baguwen](baguwen.md)
+
+base bonus, bonus is equal to base bonus plus K, where K is the number of levels between the new worker and the worker's referrer
+
+Consider a referral chain A -> B -> C -> D
+
+- If that worker (C) refers worker (D), then worker (C) receives (D)'s full bonus, worker (B) receives (D);s bonus plus 1, and worker (A) receives (D);s bonus plus 2
+
+- sort by their total bonus amount from largest to smallest.
+- If same total bonus amount, then the worker's names shall appear in lexicographical rder.
+-
