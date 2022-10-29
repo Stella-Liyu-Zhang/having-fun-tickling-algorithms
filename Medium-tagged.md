@@ -13,6 +13,20 @@
 - [347. Top K Frequent Elements](#347-top-k-frequent-elements)
   - [Approach 1: MaxHeap (priority queue)](#approach-1-maxheap-priority-queue-1)
   - [Approach 2: MinHeap](#approach-2-minheap)
+- [1155. Number of Dice Rolls With Target Sum](#1155-number-of-dice-rolls-with-target-sum)
+  - [Approach 1: Dynamic Programming](#approach-1-dynamic-programming)
+  - [Approach 2: HashMap, recursion](#approach-2-hashmap-recursion)
+  - [Approach 1:](#approach-1)
+  - [Approach 1:](#approach-1-1)
+  - [Approach 1:](#approach-1-2)
+  - [Approach 1:](#approach-1-3)
+  - [Approach 1:](#approach-1-4)
+  - [Approach 1:](#approach-1-5)
+  - [Approach 1:](#approach-1-6)
+  - [Approach 1:](#approach-1-7)
+  - [Approach 1:](#approach-1-8)
+  - [Approach 1:](#approach-1-9)
+  - [Approach 1:](#approach-1-10)
 
 ## 22. Generate Parentheses
 
@@ -281,9 +295,25 @@ so that the heap size can be maintained <= k.
 
 ```
 
-##
+## 1155. Number of Dice Rolls With Target Sum
 
-Approach 1:
+### Approach 1: Dynamic Programming
+
+> ![](assets/20221028163212.jpg)
+
+- Time complexity: `O(n*k*target)`
+- Space complexity:
+-
+
+```java
+
+```
+
+### Approach 2: HashMap, recursion
+
+- Time complexity:
+- Space complexity:
+-
 
 ```java
 
@@ -291,7 +321,13 @@ Approach 1:
 
 ##
 
-Approach 1:
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
 
 ```java
 
@@ -299,7 +335,13 @@ Approach 1:
 
 ##
 
-Approach 1:
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
 
 ```java
 
@@ -307,7 +349,13 @@ Approach 1:
 
 ##
 
-Approach 1:
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
 
 ```java
 
@@ -315,7 +363,13 @@ Approach 1:
 
 ##
 
-Approach 1:
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
 
 ```java
 
@@ -323,7 +377,13 @@ Approach 1:
 
 ##
 
-Approach 1:
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
 
 ```java
 
@@ -331,7 +391,13 @@ Approach 1:
 
 ##
 
-Approach 1:
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
 
 ```java
 
@@ -339,7 +405,13 @@ Approach 1:
 
 ##
 
-Approach 1:
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
 
 ```java
 
@@ -347,7 +419,13 @@ Approach 1:
 
 ##
 
-Approach 1:
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
 
 ```java
 
@@ -355,7 +433,13 @@ Approach 1:
 
 ##
 
-Approach 1:
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
 
 ```java
 
@@ -363,7 +447,13 @@ Approach 1:
 
 ##
 
-Approach 1:
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
 
 ```java
 
@@ -371,23 +461,13 @@ Approach 1:
 
 ##
 
-Approach 1:
+### Approach 1:
 
-```java
+>
 
-```
-
-##
-
-Approach 1:
-
-```java
-
-```
-
-##
-
-Approach 1:
+- Time complexity:
+- Space complexity:
+-
 
 ```java
 
