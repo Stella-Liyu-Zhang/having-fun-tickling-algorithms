@@ -7,6 +7,8 @@
 - [1300. Sum of Mutated Array Closest to Target](#1300-sum-of-mutated-array-closest-to-target)
 - [692. Top K Frequent Words](#692-top-k-frequent-words)
   - [Approach 1: Priority Queue Heap](#approach-1-priority-queue-heap)
+- [1328. Break a Palindrome](#1328-break-a-palindrome)
+  - [Approach 1: Greedy Algo](#approach-1-greedy-algo)
   - [Approach 1:](#approach-1)
   - [Approach 1:](#approach-1-1)
   - [Approach 1:](#approach-1-2)
@@ -18,7 +20,6 @@
   - [Approach 1:](#approach-1-8)
   - [Approach 1:](#approach-1-9)
   - [Approach 1:](#approach-1-10)
-  - [Approach 1:](#approach-1-11)
 
 ## 7. Reverse Integer
 
@@ -149,18 +150,36 @@ class Solution {
 }
 ```
 
-##
+## 1328. Break a Palindrome
 
-### Approach 1:
+### Approach 1: Greedy Algo
 
->
+> - Check half of the string,
 
-- Time complexity:
-- Space complexity:
--
+    replace a non 'a' character to 'a'.
+
+- If only one character, return empty string.
+  Otherwise repalce the last character to 'b'
+
+- Time complexity: O(n/2)
+- Space complexity: O(n)
+  (if n is the length of string)
 
 ```java
-
+public String breakPalindrome(String palindrome) {
+        int len = palindrome.length();
+        StringBuilder ans = new StringBuilder(palindrome);
+        // no way to replace a character to make it not a palindrome
+        if(len == 0 || len == 1) return "";
+        for(int i = 0; i < len/2; i++){
+            if(palindrome.charAt(i) != 'a'){
+               ans.setCharAt(i, 'a');
+               return ans.toString();
+            }
+        }
+        ans.setCharAt(len-1, 'b');
+        return ans.toString();
+    }
 ```
 
 ##
