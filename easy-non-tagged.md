@@ -139,3 +139,50 @@ class Solution {
     }
 }
 ```
+
+## 2068. Check Whether Two Strings are Almost Equivalent
+
+### Approach 1: using 2 arrays of 26 size
+
+- time: Math.max(26, word1.length()) - O(n)
+- Space: O(52) - O(n)
+
+```java
+class Solution {
+    public boolean checkAlmostEquivalent(String word1, String word2) {
+        int[] one = new int[26];
+        int[] two = new int[26];
+        for(int i = 0; i < word1.length(); i ++){
+            one[word1.charAt(i) - 'a'] ++;
+            two[word2.charAt(i) - 'a'] ++;
+        }
+        for(int j = 0; j < 26; j ++){
+            if (Math.abs(one[j] - two[j]) > 3){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
+
+### Approach 2: HashMap
+
+- Time: O(Math.max(word1.length, max of #unique characters));
+- Space: O(max of #unique characters)
+
+```java
+ public boolean checkAlmostEquivalent(String word1, String word2) {
+        Map<Character, Integer> map = new HashMap<>();
+        for(int i = 0; i < word1.length(); i ++){
+            map.put(word1.charAt(i), map.getOrDefault(word1.charAt(i), 0) + 1);
+            map.put(word2.charAt(i), map.getOrDefault(word2.charAt(i), 0) - 1);
+        }
+        for(int v: map.values()){
+            if (Math.abs(v) > 3){
+                return false;
+            }
+        }
+        return true;
+}
+```
