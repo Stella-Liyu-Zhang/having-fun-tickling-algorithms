@@ -12,6 +12,8 @@
 - [62. Unique Paths](#62-unique-paths)
   - [Approach 1: Dynamic Programming](#approach-1-dynamic-programming)
   - [Approach 2: Memoization](#approach-2-memoization)
+- [91. Decode Ways](#91-decode-ways)
+  - [Approach 1: DP](#approach-1-dp)
   - [Approach 1:](#approach-1)
   - [Approach 1:](#approach-1-1)
   - [Approach 1:](#approach-1-2)
@@ -22,7 +24,6 @@
   - [Approach 1:](#approach-1-7)
   - [Approach 1:](#approach-1-8)
   - [Approach 1:](#approach-1-9)
-  - [Approach 1:](#approach-1-10)
 
 ## 7. Reverse Integer
 
@@ -237,18 +238,32 @@ class Solution {
 }
 ```
 
-##
+## 91. Decode Ways
 
-### Approach 1:
+### Approach 1: DP
 
->
+> determine how many ways, use all the subproblems up to solve the nth problem
+> dp[i] will store the number of ways to decode s.
 
-- Time complexity:
-- Space complexity:
--
+- Time complexity: O(n)
+- Space complexity: O(n)
 
 ```java
-
+        int ans = 0;
+        int[] dp = new int[s.length() + 1];
+        dp[0] = 1;
+        dp[1] = s.charAt(0) == '0'? 0 : 1;
+        for(int i = 2; i <= s.length(); i ++){
+            int oneDigit = Integer.valueOf(s.substring(i-1, i));
+            int twoDigit = Integer.valueOf(s.substring(i-2,i));
+            if (oneDigit > 0 && oneDigit < 10){
+                dp[i] += dp[i-1];
+            }
+            if(twoDigit >= 10 && twoDigit <= 26){
+                dp[i] += dp[i-2];
+            }
+        }
+        return dp[s.length()];
 ```
 
 ##
