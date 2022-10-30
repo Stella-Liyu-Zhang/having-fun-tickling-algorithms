@@ -16,6 +16,8 @@
 - [1155. Number of Dice Rolls With Target Sum](#1155-number-of-dice-rolls-with-target-sum)
   - [Approach 1: Dynamic Programming](#approach-1-dynamic-programming)
   - [Approach 2: HashMap, recursion](#approach-2-hashmap-recursion)
+- [78. Subsets](#78-subsets)
+  - [Approach 1: Backtracking](#approach-1-backtracking-1)
   - [Approach 1:](#approach-1)
   - [Approach 1:](#approach-1-1)
   - [Approach 1:](#approach-1-2)
@@ -26,7 +28,6 @@
   - [Approach 1:](#approach-1-7)
   - [Approach 1:](#approach-1-8)
   - [Approach 1:](#approach-1-9)
-  - [Approach 1:](#approach-1-10)
 
 ## 22. Generate Parentheses
 
@@ -319,18 +320,46 @@ so that the heap size can be maintained <= k.
 
 ```
 
-##
+## 78. Subsets
 
-### Approach 1:
+### Approach 1: Backtracking
 
->
+> ![](assets/20221029221410.jpg) > ![](assets/20221029223148.jpg)
 
-- Time complexity:
-- Space complexity:
--
+- Time complexity:O(2^n), n is size of nums.
+  the recursive call where you have index+1 should be i+1; Otherwise there would be duplicates.
+- Space complexity: O(n), as the stack goes, the deepest of the stack could go would be the size of nums.
+
+```
+We define a backtrack function named backtrack(first, curr) which takes the index of first element to add and a current combination as arguments.
+
+If the current combination is done, we add the combination to the final output.
+
+Otherwise, we iterate over the indexes i from first to the length of the entire sequence n.
+
+Add integer nums[i] into the current combination curr.
+
+Proceed to add more integers into the combination : backtrack(i + 1, curr).
+
+Backtrack by removing nums[i] from curr.
+
+```
 
 ```java
-
+public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> powerset = new ArrayList<>();
+        backtrack(nums, powerset, 0, new ArrayList<Integer>());
+        return powerset;
+    }
+    //generate the powerset of the subset
+public void backtrack(int[] nums, List<List<Integer>> powerset, int index, List<Integer> curr){
+        powerset.add(new ArrayList<>(curr));
+        for(int i = index; i < nums.length; i++ ){
+            curr.add(nums[i]);
+            backtrack(nums, powerset, i + 1, curr);
+            curr.remove(curr.size() - 1);
+        }
+    }
 ```
 
 ##

@@ -1,3 +1,19 @@
+## Get the sum of digits of a number
+
+```java
+while(number > 0)
+{
+//finds the last digit of the given number
+digit = number % 10;
+//adds last digit to the variable sum
+sum = sum + digit;
+//removes the last digit from the number
+number = number / 10;
+}
+```
+
+## Get the nth power of x
+
 ```java
 //nest myPow
 double myPow(double x, int n) {
