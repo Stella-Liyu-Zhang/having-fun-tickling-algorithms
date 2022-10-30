@@ -9,6 +9,9 @@
   - [Approach 1: Priority Queue Heap](#approach-1-priority-queue-heap)
 - [1328. Break a Palindrome](#1328-break-a-palindrome)
   - [Approach 1: Greedy Algo](#approach-1-greedy-algo)
+- [62. Unique Paths](#62-unique-paths)
+  - [Approach 1: Dynamic Programming](#approach-1-dynamic-programming)
+  - [Approach 2: Memoization](#approach-2-memoization)
   - [Approach 1:](#approach-1)
   - [Approach 1:](#approach-1-1)
   - [Approach 1:](#approach-1-2)
@@ -180,6 +183,58 @@ public String breakPalindrome(String palindrome) {
         ans.setCharAt(len-1, 'b');
         return ans.toString();
     }
+```
+
+## 62. Unique Paths
+
+### Approach 1: Dynamic Programming
+
+> dp[i][j] = dp[i-1][j] + dp[i][j-1];
+
+- Time complexity: O(m\*n)
+- Space complexity: O(m\*n)
+
+```java
+ public int uniquePaths(int m, int n) {
+        int[][] dp = new int[m][n];
+        for(int i = 0; i < m; i ++){
+            for(int j = 0; j < n; j++){
+                if(i == 0 || j == 0){
+                    dp[i][j] = 1;
+                }else{
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
+                }
+            }
+        }
+        return dp[m-1][n-1];
+    }
+```
+
+### Approach 2: Memoization
+
+- Time complexity: O(m\*n)
+- Space complexity: O(m\*n)
+
+```java
+class Solution {
+    private Map<String, Integer> map = new HashMap<String, Integer>();
+    public int uniquePaths(int m, int n) {
+        //base case
+        if (m == 1 || n == 1) return 1;
+        // check if we have already calculated unique paths for cell(m, n)
+        String cell = new String(m + "," + n);
+        // if yes, then get its value from our memoization table
+        if (map.containsKey(cell)) return map.get(cell);
+        // else, explore the down move
+        int downMove = uniquePaths(m-1, n);
+        // explore the right move
+        int rightMove = uniquePaths(m, n-1);
+
+        //put the value obtained for unique paths from cell(m,n)
+        map.put(cell, downMove + rightMove);
+        return downMove + rightMove;
+    }
+}
 ```
 
 ##

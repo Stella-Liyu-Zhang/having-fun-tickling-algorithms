@@ -186,3 +186,359 @@ class Solution {
         return true;
 }
 ```
+
+## 70. Climbing Stairs
+
+### Approach 1: Dynamic Programming
+
+> Base cases:
+
+- if n <= 0, then the number of ways should be zero.
+- if n == 1, then there is only way to climb the stair.
+- if n == 2, then there are two ways to climb the stairs. One solution is one step by another; the other one is two steps at one time.
+- `[n] = [n-1] + [n-2]`, because from the [n-1] point, we can take 1 step to reach [n], and from the [n-2] point, we could take 2 steps to get there.
+
+- Time complexity: O(n)
+- Space complexity: O(n)
+
+```java
+ public int climbStairs(int n) {
+        int[] dp = new int[n+1];
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+        if (n == 2) return 2;
+
+        dp[1] = 1;
+        dp[2] = 2;
+        for(int i = 3; i <= n; i ++){
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+```
+
+## 509. Fibonacci Number
+
+### Approach 1: DP
+
+> base case: F(0) = 0, F(1) = 1
+>
+> dp[i] = dp[i-1] + dp[i-2];
+
+- Time complexity: O(n)
+- Space complexity: O(n)
+
+```java
+ public int fib(int n) {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+        if (n == 2) return 1;
+        int[] dp = new int[n+1];
+        dp[0] = 0;
+        dp[1] = 1;
+        for(int i = 2; i <= n; i ++){
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+```
+
+### Approach 2: Iterative
+
+> - while n is greater than 1:
+> - let sum becomes the previous 2 items' sum
+> - and let the previous first item becomes the second item
+> - let second item becomes sum, then iterative
+
+- Time complexity: O(n)
+- Space complexity: O(1)
+
+```java
+        if(N <= 1) return N;
+		int a = 0, b = 1;
+		while(N-- > 1){
+			int sum = a + b;
+			a = b;
+			b = sum;
+		}
+        return b;
+```
+
+### Approach 3: Recursive
+
+> `else, return fib(N - 1) + fib(N - 2)`
+
+- Time complexity: O(2^n)- since T(n) = T(n-1) + T(n-2)is an exponential time
+- Space complexity: O(n) - space for recursive function call stack
+
+```java
+public int fib(int N){
+        if(N <= 1) return N;
+        else
+            return fib(N - 1) + fib(N - 2);
+}
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
