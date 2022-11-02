@@ -84,6 +84,52 @@ duplicate values, we just need to use a used[] boolean array to track if each is
 
 ```
 
+## 39. Combination Sum
+
+## 78. Subsets
+
+```java
+ public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+       // Arrays.sort(nums);
+        backtrack(list, nums, new ArrayList(), 0);
+        return list;
+    }
+
+    public void backtrack(List<List<Integer>> list, int[] nums, List<Integer> temp, int start){
+
+            list.add(new ArrayList<>(temp));
+            for(int i = start; i < nums.length; i++){
+                temp.add(nums[i]);
+                backtrack(list, nums, temp, i + 1);
+                temp.remove(temp.size() - 1);
+            }
+
+    }
+
+```
+
+## 90. Subsets II
+
+```java
+
+  public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> list = new ArrayList();
+        Arrays.sort(nums);
+        backtrack(list, nums, new ArrayList<>(), 0);
+        return list;
+    }
+    public void backtrack(List<List<Integer>> list, int[] nums, List<Integer> temp, int start){
+        list.add(new ArrayList<>(temp));
+        for(int i = start; i < nums.length; i ++){
+            if (i > start && nums[i] == nums[i-1]) continue;
+            temp.add(nums[i]);
+            backtrack(list, nums, temp, i + 1);
+            temp.remove(temp.size() - 1);
+        }
+    }
+```
+
 ## (PermuationI, Permuation II)
 
 - As I think for permutation at least, it is O(n!), since you have 10 numbers, you choose one of the ten number from it, then you choose one of nine numbers from it and then ......, Thus it is 109876...\*1
