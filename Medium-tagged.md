@@ -374,6 +374,10 @@ public void backtrack(int[] nums, List<List<Integer>> powerset, int index, List<
 - Time complexity: O(n)
 - Space complexity: O(1)
 
+> Note: 1) to find the first decreasing element, it has to be `first >= 0 && nums[first] >= nums[first+1]`, so that we keep on looping when nums[first] is greater than or equal to nums[first+1]
+>
+> 2. Note that to find the next largest one in the rest of the decreasing array, we keep on looping whenever nums[justLargest] <= nums[first]
+
 ```java
 class Solution {
     public void nextPermutation(int[] nums) {

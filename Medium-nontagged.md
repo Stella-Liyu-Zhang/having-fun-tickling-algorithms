@@ -23,7 +23,6 @@
   - [Approach 1:](#approach-1-6)
   - [Approach 1:](#approach-1-7)
   - [Approach 1:](#approach-1-8)
-  - [Approach 1:](#approach-1-9)
 
 ## 7. Reverse Integer
 
@@ -264,20 +263,6 @@ class Solution {
             }
         }
         return dp[s.length()];
-```
-
-##
-
-### Approach 1:
-
->
-
-- Time complexity:
-- Space complexity:
--
-
-```java
-
 ```
 
 ##
