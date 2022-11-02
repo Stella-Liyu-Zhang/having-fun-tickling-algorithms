@@ -18,6 +18,8 @@
   - [Approach 2: HashMap, recursion](#approach-2-hashmap-recursion)
 - [78. Subsets](#78-subsets)
   - [Approach 1: Backtracking](#approach-1-backtracking-1)
+- [31. Next Permutation](#31-next-permutation)
+  - [Approach 1: smart Math algo](#approach-1-smart-math-algo)
   - [Approach 1:](#approach-1)
   - [Approach 1:](#approach-1-1)
   - [Approach 1:](#approach-1-2)
@@ -27,7 +29,6 @@
   - [Approach 1:](#approach-1-6)
   - [Approach 1:](#approach-1-7)
   - [Approach 1:](#approach-1-8)
-  - [Approach 1:](#approach-1-9)
 
 ## 22. Generate Parentheses
 
@@ -362,18 +363,48 @@ public void backtrack(int[] nums, List<List<Integer>> powerset, int index, List<
     }
 ```
 
-##
+## 31. Next Permutation
 
-### Approach 1:
+### Approach 1: smart Math algo
 
->
+1. find the first decreasing sequence starting from the end //a[i]a[i] and a[i-1]a[i−1] where, a[i] > a[i-1]a[i]>a[i−1]
+2. find the the number which is just larger than itself among the numbers lying to its right section, say a[j], for substitution and perform swap
+3. rearrange remaning array by reversing it
 
-- Time complexity:
-- Space complexity:
--
+- Time complexity: O(n)
+- Space complexity: O(1)
 
 ```java
-
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int first = nums.length - 2;
+        while (first >= 0 && nums[first] >= nums[first+1]){
+            first --;
+        }
+        if (first >= 0){
+            int justLargest = nums.length - 1;
+            while (justLargest >= 0 && nums[justLargest] <= nums[first]){
+                justLargest --;
+            }
+            swap (nums, justLargest, first);
+        }
+        //rearrange the remaning array by reversing it
+        reverse(nums, first + 1);
+    }
+    public void swap(int[] nums, int i, int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    public void reverse(int[] nums, int start){
+        int end = nums.length - 1;
+        while (start < end){
+            swap(nums, start, end);
+            start ++;
+            end --;
+        }
+    }
+}
 ```
 
 ##
