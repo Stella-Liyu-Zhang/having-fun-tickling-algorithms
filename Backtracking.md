@@ -14,6 +14,76 @@ If none of the move works out, return false, NO SOLUTON.
 
 ```
 
+## 46. Permutations
+
+```java
+ /*
+      1 2 3 -> 1 3 2
+      2 1 3 -> 2 3 1
+      3 2 1 -> 3 1 2
+
+      1 2 3
+        3 2
+      2 1 3
+        3 1
+      3 1 2
+        2 1
+    If we exhausted the current branch, currResult.size() == nums.length, we will backtrack.
+    To make sure each element is used once, we establish boolean[] used.
+    */
+    public List<List<Integer>> permute(int[] nums) {
+         List<List<Integer>> ans = new ArrayList<>();
+         if(nums == null || nums.length == 0){
+             return ans;
+         }
+         backtrack(ans, new ArrayList<>(), nums);
+         return ans;
+    }
+    public void backtrack(List<List<Integer>> ans, List<Integer> temp, int[] nums){
+         if (temp.size() == nums.length){
+             ans.add(new ArrayList<>(temp));
+         }else{
+             for(int i = 0; i < nums.length; i ++){
+                 if (temp.contains(nums[i])){ //element already exists, skip
+                     continue;
+                 }
+                 temp.add(nums[i]);
+                 backtrack(ans, temp, nums);
+                 temp.remove(temp.size() - 1);
+             }
+         }
+    }
+```
+
+## 47. Permutations II
+
+duplicate values, we just need to use a used[] boolean array to track if each is visited.
+
+```java
+ public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Arrays.sort(nums);
+        backtrack(ans, new ArrayList<>(), nums, new boolean[nums.length]);
+        return ans;
+
+    }
+    public void backtrack(List<List<Integer>> ans, List<Integer> temp, int[] nums, boolean[] used){
+        if (temp.size() == nums.length){
+            ans.add(new ArrayList<>(temp));
+        }else{
+            for(int i = 0; i < nums.length; i++){
+                if (used[i] || i > 0 && nums[i] == nums[i-1] && !used[i-1] ) continue;
+                used[i] = true;
+                temp.add(nums[i]);
+                backtrack(ans, temp, nums, used);
+                used[i] = false;
+                temp.remove(temp.size() - 1);
+            }
+        }
+    }
+
+```
+
 ## (PermuationI, Permuation II)
 
 - As I think for permutation at least, it is O(n!), since you have 10 numbers, you choose one of the ten number from it, then you choose one of nine numbers from it and then ......, Thus it is 109876...\*1
