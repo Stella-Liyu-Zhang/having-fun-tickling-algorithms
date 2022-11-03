@@ -279,18 +279,48 @@ public int fib(int N){
 }
 ```
 
-##
+## 58. Length of Last Word
 
-### Approach 1:
+### Approach 1: Stack
 
->
-
-- Time complexity:
-- Space complexity:
--
+- Time complexity: number of characters in the input String. --> O(n)
+- Space complexity: s.length()--> O(n)
 
 ```java
+class Solution {
+    public int lengthOfLastWord(String s) {
+       Stack<String> stack = new Stack<>();
 
+        for(String word:s.split(" ")){
+            stack.push(word);
+        }
+        return stack.pop().length();
+    }
+}
+```
+
+### Approach 2: loop from the back
+
+- Time complexity: O(last word)
+- Space complexity: O(1)
+
+```java
+class Solution {
+    public int lengthOfLastWord(String s) {
+        int length = 0;
+        for (int i = s.length() - 1; i >= 0; i --){
+            if (s.charAt(i) != ' '){
+                length ++;
+            }else{
+                if (length > 0){
+                    return length;
+                }
+            }
+        }
+
+        return length;
+    }
+}
 ```
 
 ##
