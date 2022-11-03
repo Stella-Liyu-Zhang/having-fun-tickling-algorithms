@@ -65,3 +65,17 @@ class Solution {
 > The time complexity of postorder traversal is O(n), where 'n' is the size of binary tree.
 
 > Whereas, the space complexity of postorder traversal is O(1), if we do not consider the stack size for function calls. Otherwise, the space complexity of postorder traversal is O(h), where 'h' is the height of tree.
+
+## 132. Palindrome Partitioning II
+
+```
+1) cut[i] is the minimum of cut[j - 1] + 1 (j <= i), if [j, i] is palindrome.
+2) If [j, i] is palindrome, [j + 1, i - 1] is palindrome, and c[j] == c[i].
+
+The 2nd point reminds us of using dp (caching).
+
+a   b   a   |   c  c
+                j  i
+       j-1  |  [j, i] is palindrome
+   cut(j-1) +  1
+```
