@@ -323,18 +323,33 @@ class Solution {
 }
 ```
 
-##
+## 2273. Find Resultant Array After Removing Anagrams
 
-### Approach 1:
+### Approach 1: sorting
 
->
-
-- Time complexity:
-- Space complexity:
--
+- Time complexity: O(mn log (n))
+- Space complexity: O(n)
+- First, we define a prev one to be the sorted anagram.
+- And only when they are different could we add it to our final list, else, we skip it.
+- Update the prev every time
 
 ```java
-
+class Solution {
+    public List<String> removeAnagrams(String[] words) {
+       List<String> list = new ArrayList<>();
+       String prev = "";
+       for(int i = 0; i < words.length; i++){
+           char[] ch = words[i].toCharArray();
+           Arrays.sort(ch);
+           String curr = new String(ch);
+           if (!curr.equals(prev)){
+               list.add(words[i]);
+               prev = curr;
+           }
+       }
+       return list;
+    }
+}
 ```
 
 ##
