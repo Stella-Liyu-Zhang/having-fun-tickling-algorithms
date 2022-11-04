@@ -21,6 +21,9 @@
 - [31. Next Permutation](#31-next-permutation)
   - [Approach 1: smart Math algo](#approach-1-smart-math-algo)
 - [2. Add Two Numbers](#2-add-two-numbers)
+  - [Approach 1: Math](#approach-1-math)
+- [445. Add Two Numbers II](#445-add-two-numbers-ii)
+  - [Approach 1: Stack](#approach-1-stack)
   - [Approach 1:](#approach-1)
   - [Approach 1:](#approach-1-1)
   - [Approach 1:](#approach-1-2)
@@ -28,8 +31,6 @@
   - [Approach 1:](#approach-1-4)
   - [Approach 1:](#approach-1-5)
   - [Approach 1:](#approach-1-6)
-  - [Approach 1:](#approach-1-7)
-  - [Approach 1:](#approach-1-8)
 
 ## 22. Generate Parentheses
 
@@ -414,7 +415,7 @@ class Solution {
 
 ## 2. Add Two Numbers
 
-### Approach 1:
+### Approach 1: Math
 
 - make a dummy node
 - make a curr node pointing to the dummy node
@@ -472,9 +473,9 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
     }
 ```
 
-##
+## 445. Add Two Numbers II
 
-### Approach 1:
+### Approach 1: Stack
 
 >
 
@@ -483,7 +484,35 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 -
 
 ```java
+ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> stack1 = new Stack<>();
+        Stack<Integer> stack2 = new Stack<>();
 
+        while (l1 != null){
+            stack1.push(l1.val);
+            l1 = l1.next;
+        }
+        while (l2 != null){
+            stack2.push(l2.val);
+            l2 = l2.next;
+        }
+        int sum = 0;
+        ListNode list = new ListNode(0);
+        while (!stack1.isEmpty() || !stack2.isEmpty()){
+           if (!stack1.isEmpty()){
+               sum += stack1.pop();
+           }
+           if (!stack2.isEmpty()){
+               sum += stack2.pop();
+           }
+           list.val = sum%10;
+           ListNode head = new ListNode(sum/10);
+           head.next = list;
+           list = head;
+           sum /= 10;
+        }
+        return list.val == 0?  list.next : list;
+    }
 ```
 
 ##
