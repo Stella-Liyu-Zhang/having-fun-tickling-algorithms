@@ -18,6 +18,19 @@
   - [Approach 1: Stack](#approach-1-stack)
   - [Approach 2: Iteratively reverse it by changing the pointers](#approach-2-iteratively-reverse-it-by-changing-the-pointers)
   - [Approach 3: Recursive approach](#approach-3-recursive-approach)
+- [203. Remove Linked List Elements](#203-remove-linked-list-elements)
+  - [Approach 1: straightforwad](#approach-1-straightforwad)
+  - [Approach 1:](#approach-1)
+  - [Approach 1:](#approach-1-1)
+  - [Approach 1:](#approach-1-2)
+  - [Approach 1:](#approach-1-3)
+  - [Approach 1:](#approach-1-4)
+  - [Approach 1:](#approach-1-5)
+  - [Approach 1:](#approach-1-6)
+  - [Approach 1:](#approach-1-7)
+  - [Approach 1:](#approach-1-8)
+  - [Approach 1:](#approach-1-9)
+  - [Approach 1:](#approach-1-10)
 
 ## 21. Merge Two Sorted Lists
 
@@ -473,4 +486,191 @@ class Solution {
         return reverseList(next, head);
     }
 }
+```
+
+## 203. Remove Linked List Elements
+
+### Approach 1: straightforwad
+
+> first, skip the head whenever it starts with nodes as same value as val
+>
+> - Next, we make a current node pointing at head
+>   - while the curr and curr.next are not null,
+>   - if the curr.next.val is same as val, we skip it by `curr.next = curr.next.next;`
+>   - else we just do curr = curr.next as normal traversals
+> - return `head` ultimately
+
+- Time complexity: O(n)
+- Space complexity: O(n)
+
+```java
+ public ListNode removeElements(ListNode head, int val) {
+        while (head != null && head.val == val){
+            head = head.next;
+        }
+        ListNode curr = head;
+        while (curr != null && curr.next != null){
+            if (curr.next.val == val){
+                curr.next = curr.next.next;
+            }else{
+                curr = curr.next;
+            }
+        }
+
+        return head;
+    }
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
+```
+
+##
+
+### Approach 1:
+
+>
+
+- Time complexity:
+- Space complexity:
+-
+
+```java
+
 ```
