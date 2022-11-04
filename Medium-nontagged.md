@@ -14,6 +14,9 @@
   - [Approach 2: Memoization](#approach-2-memoization)
 - [91. Decode Ways](#91-decode-ways)
   - [Approach 1: DP](#approach-1-dp)
+- [49. Group Anagrams](#49-group-anagrams)
+  - [Approach 1: HashTable](#approach-1-hashtable)
+  - [Approach 2: Frequency array](#approach-2-frequency-array)
   - [Approach 1:](#approach-1)
   - [Approach 1:](#approach-1-1)
   - [Approach 1:](#approach-1-2)
@@ -22,7 +25,6 @@
   - [Approach 1:](#approach-1-5)
   - [Approach 1:](#approach-1-6)
   - [Approach 1:](#approach-1-7)
-  - [Approach 1:](#approach-1-8)
 
 ## 7. Reverse Integer
 
@@ -265,18 +267,69 @@ class Solution {
         return dp[s.length()];
 ```
 
-##
+## 49. Group Anagrams
 
-### Approach 1:
+### Approach 1: HashTable
 
->
+- First, we design a hashmap with
+  - Key: the sorted string
+  - Value: the list of values that are anagram with the sorted string
+- Then we loop through the strs array
+  - make the current string to be an array of character, sort it, and make it back to a string
+  - check if the map contains the sorted string
+    - if not contain, we will add am empty arraylist corresponding to the key
+  - Then, we add the current into the corresponding list of array
+- Ultimately, we add all the values into the list, and return it.
 
-- Time complexity:
-- Space complexity:
--
+- Time complexity:`O(nmlogm)`
+  - n is the total number of words and m is the length of each word.
+- Space: `O(n)`
 
 ```java
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> list = new ArrayList();
+        if (strs.length == 0) return list;
+        //key: sorted string
+        //value: the list of anagram strings
+        HashMap<String, List<String>> map = new HashMap();
+        for(String curr: strs){
+            char[] c = curr.toCharArray();
+            Arrays.sort(c);
+            String sorted = new String(c);
+            if (!map.containsKey(sorted)){
+                map.put(sorted, new ArrayList());
+            }
+            //add the current word to the arraylist
+            map.get(sorted).add(curr);
+        }
+        list.addAll(map.values());
+        return list;
+    }
+}
+```
 
+### Approach 2: Frequency array
+
+- Time complexity is `O(m*n)` or O( sum of all chars in strs). Use char[26] as bucket to count the frequency instead of Arrays.sort, this can reduce the O(nlgn) to O(n) when calculate the key.
+- Space: O(n)
+
+```java
+public List<List<String>> groupAnagrams(String[] strs) {
+        if(strs == null || strs.length == 0) return Collections.emptyList();
+        Map<String, List<String>> map = new HashMap<>();
+        for(String s: strs){
+            char[] frequencyArr = new char[26];
+            for(int i = 0;i<s.length();i++){
+                frequencyArr[s.charAt(i) - 'a']++;
+            }
+            String key = new String(frequencyArr);
+            List<String> tempList = map.getOrDefault(key, new LinkedList<String>());
+            tempList.add(s);
+            map.put(key,tempList);
+        }
+        return new LinkedList<>(map.values());
+    }
 ```
 
 ##

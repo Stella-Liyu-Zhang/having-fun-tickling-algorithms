@@ -238,8 +238,6 @@ Space: constant
 
 ```java
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        if (headA == null || headB == null) return null;
-
         ListNode pointerA = headA;
         ListNode pointerB = headB;
 
