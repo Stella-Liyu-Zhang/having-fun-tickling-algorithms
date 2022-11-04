@@ -20,6 +20,7 @@
   - [Approach 1: Backtracking](#approach-1-backtracking-1)
 - [31. Next Permutation](#31-next-permutation)
   - [Approach 1: smart Math algo](#approach-1-smart-math-algo)
+- [2. Add Two Numbers](#2-add-two-numbers)
   - [Approach 1:](#approach-1)
   - [Approach 1:](#approach-1-1)
   - [Approach 1:](#approach-1-2)
@@ -411,18 +412,64 @@ class Solution {
 }
 ```
 
-##
+## 2. Add Two Numbers
 
 ### Approach 1:
 
->
+- make a dummy node
+- make a curr node pointing to the dummy node
+- define carry to be 0
+- while l1 is not null or l2 is not null,
+  - if l1 is null, sum += l2.val + carry, and move l2 to next
+  - if l2 is null, sum += l1.val + carry, and move l1 to next
+  - else,
+    - we compute sum = l2.val + l1.val + carry, and move both pointers to next
+  - compute a node with sum%10 as its value
+  - make curr.next pointing to the node
+  - compute the carry to be sum/10
+  - move curr one pointer foward.
+- if ultimately the carry is remained,
+- we create a carried node, and make curr.next pointing to it
+- return result.next.
 
-- Time complexity:
-- Space complexity:
--
+> edge cases
+> Null lists, lists of unequal length, handle sums involving carries , extra carry value at end
+
+- Time complexity: O(max (N,M))
+- Space complexity: O(max (N,M))
 
 ```java
+public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode result = new ListNode(-1);
+        ListNode curr = result;
+        int carry = 0;
 
+
+        while (l1 != null || l2 != null){
+            int sum = 0;
+            if (l1 == null){
+                sum += l2.val + carry;
+                l2 = l2.next;
+            }else if (l2 == null){
+                sum += l1.val + carry;
+                l1 = l1.next;
+            }else{
+                sum += l2.val + l1.val + carry;
+                l1 = l1.next;
+                l2 = l2.next;
+            }
+            int num = sum%10;
+            carry = sum/10;
+            curr.next = new ListNode(num);
+            curr = curr.next;
+
+        }
+        if (carry > 0){
+            ListNode carried = new ListNode(carry);
+            curr.next = carried;
+        }
+        return result.next;
+    }
 ```
 
 ##
