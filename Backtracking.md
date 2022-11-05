@@ -234,6 +234,34 @@ class Solution {
 }
 ```
 
+## Path SUm
+
+- time: O(n)
+- space: O(n)
+- stack space is the longest path of the tree
+
+```java
+ public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> list = new ArrayList<>();
+        recur(list, root, targetSum, new ArrayList<>());
+        return list;
+    }
+    public void recur (List<List<Integer>> list, TreeNode root, int targetSum, List<Integer> temp){
+        if (root == null){
+            return;
+        }
+        temp.add(root.val);
+        if (root.left == null && root.right == null && root.val == targetSum){
+            list.add(new ArrayList(temp));
+        }else{
+            recur(list, root.left, targetSum - root.val, temp);
+            recur(list, root.right, targetSum - root.val, temp);
+        }
+        temp.remove(temp.size() - 1);
+    }
+}
+```
+
 ## (PermuationI, Permuation II)
 
 - As I think for permutation at least, it is O(n!), since you have 10 numbers, you choose one of the ten number from it, then you choose one of nine numbers from it and then ......, Thus it is 109876...\*1

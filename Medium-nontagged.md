@@ -244,7 +244,8 @@ class Solution {
 ### Approach 1: DP
 
 > determine how many ways, use all the subproblems up to solve the nth problem
-> dp[i] will store the number of ways to decode s.
+>
+> - dp[i] will store the number of ways to decode s.
 
 - Time complexity: O(n)
 - Space complexity: O(n)
