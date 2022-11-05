@@ -24,13 +24,14 @@
   - [Approach 1: Math](#approach-1-math)
 - [445. Add Two Numbers II](#445-add-two-numbers-ii)
   - [Approach 1: Stack](#approach-1-stack)
+- [200. Number of Islands](#200-number-of-islands)
+  - [Approach 1: recursively changing the land to water](#approach-1-recursively-changing-the-land-to-water)
   - [Approach 1:](#approach-1)
   - [Approach 1:](#approach-1-1)
   - [Approach 1:](#approach-1-2)
   - [Approach 1:](#approach-1-3)
   - [Approach 1:](#approach-1-4)
   - [Approach 1:](#approach-1-5)
-  - [Approach 1:](#approach-1-6)
 
 ## 22. Generate Parentheses
 
@@ -515,18 +516,58 @@ public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
     }
 ```
 
-##
+## 200. Number of Islands
 
-### Approach 1:
+### Approach 1: recursively changing the land to water
 
->
+> - keep track of count
+> - every time encounter 1, increase count,
+>   - call a recursive function to changes all 1s that are connected to the 1 to 0s
+> - because we don't wanna repeatedly add the same island
+> - if out of bounds or it's 0, we won't be recurring.
+> - recursively call on each direction.
 
-- Time complexity:
-- Space complexity:
--
+```
+The time complexity is O(cells). Every cell is inspected at least once, due to the nested for loops. Any single cell is inspected at most 5 times. We know this because there are 5 ways a cell (i, j) can be inspected:
+
+inspected in the nested for loop, before dfs is called
+dfs from cell (i + 1, j)
+dfs from cell (i - 1, j)
+dfs from cell (i, j + 1)
+dfs from cell (i, j - 1)
+The nested for loops obviously inspect each cell exactly once.
+
+dfs(i, j) exits immediately if (i, j) has been inspected already, which implies (i, j) can only be visited from dfs(i + 1, j) once, visited from dfs(i - 1, j) once, visited from dfs(i, j + 1) once, and visited from (i, j - 1) once.
+```
+
+- Time complexity: O(N^2), where N is the number of all the grids
+  To be more accurate, it's MN, where M is the number of all the '1's
+
+- Space complexity: O(N\*m), worst case whole grid is filled with '1
 
 ```java
+ public int numIslands(char[][] grid) {
+        if (grid == null) return 0;
+        int count = 0;
+        for(int i = 0; i < grid.length; i ++){
+            for(int j = 0; j < grid[0].length; j++){
+                if (grid[i][j] == '1'){
+                     count ++;
+                     changeLandtoWater(grid, i , j);
+                }
+            }
+        }
+        return count;
+    }
+private void changeLandtoWater(char[][] grid, int i, int j){
+        if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == '0') return;
+        grid[i][j] = '0';
+        changeLandtoWater(grid, i - 1, j);
+        changeLandtoWater(grid, i , j - 1);
+        changeLandtoWater(grid, i + 1, j);
+        changeLandtoWater(grid, i, j +1);
 
+}
 ```
 
 ##
