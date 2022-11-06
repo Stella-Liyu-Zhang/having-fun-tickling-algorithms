@@ -29,3 +29,29 @@ public int numTrees(int n) {
 }
 ···
 ```
+
+## 91. Decode Ways
+
+0 --> 1
+s.length() == 1 --> 0
+dp[i] --> ways to decode the string until length i
+
+- s.substring(i-2,i) dp[i] += dp[i-2]
+- s.substring(i-1,i) dp[i] += dp[i-1]
+
+```java
+        int[] dp = new int[s.length() + 1];
+        dp[0] = 1;
+        dp[1] = s.charAt(0) == '0'? 0 : 1;
+        for(int i = 2; i <= s.length(); i ++){
+            int length1 = Integer.valueOf(s.substring(i-1,i));
+            int length2 = Integer.valueOf(s.substring(i-2,i));
+            if (length1 > 0 && length1 < 10){
+                dp[i] += dp[i-1];
+            }
+            if (length2 >= 10 && length2 <= 26){
+                dp[i] += dp[i-2];
+            }
+        }
+        return dp[s.length()];
+```

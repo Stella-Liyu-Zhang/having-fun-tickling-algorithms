@@ -13,7 +13,7 @@ Like a normal binary tree, we can traverse a BST in preorder, inorder, postorder
 
 ## Learn one iterative inorder traversal, apply it to multiple tree questions (Java Solution)
 
-## Linked List in Binary Tree (BFS + DFS + Preorder Traversal)
+## LinkedList in Binary Tree (BFS + DFS + Preorder Traversal)
 
 - Time complexity: `O(N*min(L,H))`
 - Space complexity: `O(H)`
