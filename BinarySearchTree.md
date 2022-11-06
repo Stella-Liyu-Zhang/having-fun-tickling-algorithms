@@ -154,3 +154,85 @@ class Solution {
 ```
 
 ### Approach 2: DFS
+
+- using a recursive method
+- if root is null, return
+- if the current depth equals to the size of the list
+
+```java
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        getRightRecur(root, ans, 0);
+        return ans;
+    }
+    private void getRightRecur(TreeNode root, List<Integer> ans, int currDepth){
+        if (root == null){
+            return;
+        }
+        if (currDepth == ans.size()){
+            ans.add(root.val);
+        }
+        getRightRecur(root.right, ans, currDepth + 1);
+        getRightRecur(root.left, ans, currDepth + 1);
+    }
+```
+
+## 404. Sum of Left Leaves
+
+### Approach 1: Recursive
+
+- Time: O(n)
+- Space: O(n)
+
+```java
+    public int sumOfLeftLeaves(TreeNode root) {
+        if (root == null) return 0;
+        int sum = 0;
+        if(root.left != null ){ //check if it's a leaf.
+            if (isLeaf(root.left)){
+                sum += root.left.val;
+            }else{ //not a leaf, iterate on the left child.
+                sum += sumOfLeftLeaves(root.left);
+            }
+        }
+        //iterate on the right child to proceed to above process
+        sum += sumOfLeftLeaves(root.right);
+        return sum;
+    }
+    private boolean isLeaf(TreeNode node){
+        if (node.left == null && node.right == null){
+            return true;
+        }
+        return false;
+    }
+```
+
+### Approach 2: iterative solution
+
+- Time: O(n)
+- Space: O(n)
+
+```java
+ public int sumOfLeftLeaves(TreeNode root) {
+        if (root == null) return 0;
+        int sum = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            //add to the queue if it's not the left child
+            TreeNode node = queue.poll();
+            if (node.left != null){//check if it's a leafnode.
+                if (isLeaf(node.left)){
+                    sum += node.left.val;
+                }else{
+                    queue.add(node.left);
+                }
+            }
+            if (node.right != null) queue.add(node.right);
+        }
+        return sum;
+    }
+    private boolean isLeaf(TreeNode node){
+        return (node.left == null && node.right == null);
+    }
+```
