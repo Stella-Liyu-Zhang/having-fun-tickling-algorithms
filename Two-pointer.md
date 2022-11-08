@@ -123,3 +123,24 @@ First, what need ed to be approached is to make sure
 Given a1,a2,a3.....an as input array. Lets assume a10 and a20 are the max area situation. We need to prove that a10 can be reached by left pointer and during the time left pointer stays at a10, a20 can be reached by right pointer. That is to say, the core problem is to prove: when left pointer is at a10 and right pointer is at a21, the next move must be right pointer to a20.
 
 Since we are always moving the pointer with the smaller value, i.e. if a10 > a21, we should move pointer at a21 to a20, as we hope. Why a10 >a21? Because if a21>a10, then area of a10 and a20 must be less than area of a10 and a21. Because the area of a10 and a21 is at least height[a10] _ (21-10) while the area of a10 and a20 is at most height[a10] _ (20-10). So there is a contradiction of assumption a10 and a20 has the max area. So, a10 must be greater than a21, then next move a21 has to be move to a20. The max cases must be reached.
+
+## 125. Valid Palindrome
+
+```java
+ s = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+```
+
+```java
+public boolean isPalindrome(String s) {
+        s = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        int ap = 0, bp = s.length() - 1;
+        while(ap < bp){
+            if (s.charAt(ap) != s.charAt(bp)){
+                return false;
+            }
+            ap ++;
+            bp --;
+        }
+        return true;
+}
+```
