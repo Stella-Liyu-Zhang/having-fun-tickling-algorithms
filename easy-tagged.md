@@ -3,6 +3,9 @@
 - [21. Merge Two Sorted Lists](#21-merge-two-sorted-lists)
   - [Followup: 23. Merge k Sorted Lists](#followup-23-merge-k-sorted-lists)
 - [20. Valid Parentheses](#20-valid-parentheses)
+  - [Followup problem using stack: Bracket Match](#followup-problem-using-stack-bracket-match)
+    - [Approach 1: 2 pointer](#approach-1-2-pointer)
+    - [Approach 2: stack](#approach-2-stack)
 - [1. Two Sum](#1-two-sum)
 - [9. Palindrome Number](#9-palindrome-number)
 - [242. Valid Anagram](#242-valid-anagram)
@@ -20,6 +23,9 @@
   - [Approach 3: Recursive approach](#approach-3-recursive-approach)
 - [203. Remove Linked List Elements](#203-remove-linked-list-elements)
   - [Approach 1: straightforwad](#approach-1-straightforwad)
+- [1047. Remove All Adjacent Duplicates In String](#1047-remove-all-adjacent-duplicates-in-string)
+  - [Approach 1: StringBuilder + stack](#approach-1-stringbuilder--stack)
+  - [Approach 2: Two pointer](#approach-2-two-pointer)
   - [Approach 1:](#approach-1)
   - [Approach 1:](#approach-1-1)
   - [Approach 1:](#approach-1-2)
@@ -30,7 +36,6 @@
   - [Approach 1:](#approach-1-7)
   - [Approach 1:](#approach-1-8)
   - [Approach 1:](#approach-1-9)
-  - [Approach 1:](#approach-1-10)
 
 ## 21. Merge Two Sorted Lists
 
@@ -101,6 +106,70 @@ class Solution {
         }
         return stack.isEmpty();
     }
+}
+```
+
+### Followup problem using stack: Bracket Match
+
+> Given a string that consists of brackets, write a function bracketMatch that takes a bracket string as an input and returns the minimum number of brackets you’d need to add to the input in order to make it correctly matched.
+> Examples:
+
+```
+input:  text = “(()”
+output: 1
+
+input:  text = “(())”
+output: 0
+
+input:  text = “())(”
+output: 2
+```
+
+#### Approach 1: 2 pointer
+
+- Time: O(n)
+- Space: O(1)
+
+```java
+ public static int bracketMatch(String text) {
+    int open = 0;
+    int close = 0;
+    for (int i = 0; i < text.length(); i ++){
+      if (str.charAt(i) == '('){
+        open ++;
+      }else{ // ")"
+        if (open > 0){
+          open --;
+        }else{
+          close ++;
+        }
+      }
+    }
+    return open + close;
+}
+```
+
+#### Approach 2: stack
+
+```java
+public static int bracketMatch(String text) {
+    Stack<Character> stack = new Stack();
+    for(char c: text.toCharArray()){
+        if (c == '('){
+            stack.push('(');
+        }else{ // close bracket
+            if (stack.isEmpty() == false){
+                if (stack.peek() == '('){
+                    stack.pop();
+                }else{
+                    stack.push(')');
+                }
+            }else{
+                stack.push(')');
+            }
+        }
+    }
+    return stack.size();
 }
 ```
 
@@ -521,11 +590,50 @@ class Solution {
     }
 ```
 
-##
+## 1047. Remove All Adjacent Duplicates In String
 
-### Approach 1:
+### Approach 1: StringBuilder + stack
 
->
+- Time complexity: O(n^2)
+- Space complexity: O(n)
+
+```
+> Keep a res as a characters stack.
+> Iterate characters of S one by one.
+
+> If the next character is same as the last character in res,
+> pop the last character from res.
+> In this way, we remove a pair of adjacent duplicates characters.
+
+> If the next character is different, we append it to the end of res
+```
+
+```java
+    public String removeDuplicates(String s) {
+        StringBuilder ans = new StringBuilder();
+        for(char c: s.toCharArray()){
+            if (ans.length() > 0 && ans.charAt(ans.length() - 1) == c){
+                ans.deleteCharAt(ans.length() - 1); // O(n)
+            }else{
+                ans.append(c); //O(1)
+            }
+        }
+        return ans.toString();
+    }
+```
+
+### Approach 2: Two pointer
+
+i refers to the index to set next character in the output string.
+j refers to the index of current iteration in the input string.
+
+Iterate characters of S one by one by increasing j.
+
+- If S[j] is same as the current last character S[i - 1],
+  we remove duplicates by doing `i -= 2.`
+
+- If S[j] is different as the current last character S[i - 1],
+  we set S[i] = S[j] and increment i++.
 
 - Time complexity:
 - Space complexity:

@@ -352,7 +352,55 @@ class Solution {
 }
 ```
 
-##
+## Array of Array Products
+
+Given an array of integers arr, you’re asked to calculate for each index i the product of all integers except the integer at that index (i.e. except arr[i]). Implement a function arrayOfArrayProducts that takes an array of integers and returns an array of the products.
+
+Solve without using division and analyze your solution’s time and space complexities.
+
+**Examples:**
+
+```
+input:  arr = [8, 10, 2]
+output: [20, 16, 80] # by calculating: [10*2, 8*2, 8*10]
+
+input:  arr = [2, 7, 3, 4]
+output: [84, 24, 56, 42] # by calculating: [7*3*4, 2*3*4, 2*7*4, 2*7*3]
+```
+
+- Time: O(n)
+- Space: O(n)
+
+```java
+ static int[] arrayOfArrayProducts(int[] arr) {
+    // your code goes here
+    /*
+    0---> i - 1 product
+
+    i + 1 --> arr.length - 1
+
+    */
+    if (arr.length == 0){
+      return arr;
+    }
+    if (arr.length == 1) {
+      return new int[0];
+    }
+    int[] result = new int[arr.length];
+    int product1 = 1;
+    result[0] = 1;
+    for(int i = 1; i < arr.length; i ++){
+       product1 *= arr[i-1];
+       result[i] = product1;
+    }
+    int product2 = 1;
+    for(int i = arr.length - 2; i >= 0; i--){
+       product2 *= arr[i + 1];
+       result[i]*=product2;
+    }
+    return result;
+  }
+```
 
 ### Approach 1:
 
