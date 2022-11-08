@@ -10,6 +10,7 @@
 - [9. Palindrome Number](#9-palindrome-number)
 - [242. Valid Anagram](#242-valid-anagram)
 - [387. First Unique Character in a String](#387-first-unique-character-in-a-string)
+  - [Approach 2: Use a frequency table](#approach-2-use-a-frequency-table)
 - [160. Intersection of Two Linked Lists](#160-intersection-of-two-linked-lists)
   - [Approach 1: Visited Hashset](#approach-1-visited-hashset)
   - [Approach 2: A strange loop until two meets](#approach-2-a-strange-loop-until-two-meets)
@@ -274,6 +275,26 @@ class Solution {
         }
         return -1;
     }
+}
+```
+
+### Approach 2: Use a frequency table
+
+- Time complexity: s.length() - O(N)
+- Space complexity: number of unique characters in the string.
+
+```java
+public int firstUniqChar(String s) {
+        int[] freq = new int[26];
+        for(char c: s.toCharArray()){
+            freq[c - 'a'] ++;
+        }
+        for(int i = 0; i < s.length(); i ++){
+            if (freq[s.charAt(i)-'a'] == 1){
+                return i;
+            }
+        }
+        return -1;
 }
 ```
 
