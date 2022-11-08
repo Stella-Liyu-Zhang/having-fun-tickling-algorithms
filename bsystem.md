@@ -8,7 +8,11 @@ Tech stacks: C#, Orleans, RabbitMQ
 
 ## Resume Walkthrough
 
-### Coursework: dropped operating systems, it was supposed to be taken in FA22
+## Coursework: dropped operating systems, it was supposed to be taken in FA22
+
+## Experience
+
+### PINT,Inc
 
 ## Problem 1:
 
@@ -67,7 +71,30 @@ Given an array A consisting of strings, your function should calculate the lengt
 - every letter in S is different.
 
 - Time: `O(n\*2^n)` N = number of elements in arr
--
+- Space: `O(n\*2^n)`
+
+> Algo walk through:
+>
+> - make a global variable result, because we are going to use it in multiple methods
+> - check edge cases:
+>   - arr == null
+>   - arr.size() == 0
+> - return 0
+> - we proceed with the dfs method
+> - DFS function: `dfs(List<String>arr, String path, int index)`
+>   - first, update the result!
+>     - check if the path has unique character. if so, we get the maximum between path.length() and result.
+>   - return if index == arr.size() or doesn't have unique chars
+>   - loop from index to the rest of the array
+>   - perform the reursion using dfs, but with
+>     - `path+arr.get(i)`
+>     - `i+1`
+> - about the `isUniqueChars` function,
+>   - Make a HashSet,
+>   - check if hashset already contains the character.
+>     - if not, we return false.
+>     - if does, we add it to our set.
+>   - return true;
 
 ```java
 class Solution{
