@@ -178,3 +178,77 @@ class Solution {
     }
 }
 ```
+
+## 3. Longest Substring Without Repeating Characters
+
+### Approach 1: Hashset + sliding window
+
+- Use a hash set to track the longest substring without repeating characters so far
+- use a fast pointer right to see if character right is in the hash set or not,
+
+  - if not, great, add it to the hash set, move right forward and update the max length,
+  - otherwise, delete from the head by using a slow pointer left until we can put character left to the hash set.
+
+- Time: O(n)
+- Space: O(n)
+
+```java
+    public int lengthOfLongestSubstring(String s) {
+        int left = 0;
+        int right = 0;
+        int max = 0;
+        HashSet<Character> set = new HashSet<>();
+        while (right < s.length()){
+            if (! set.contains(s.charAt(right))){
+                set.add(s.charAt(right));
+                max = Math.max(max, set.size());
+                right ++;
+            }else{
+                set.remove(s.charAt(left));
+                left ++;
+            }
+        }
+        return max;
+    }
+```
+
+### Approach 2: HashMap + sliding window
+
+- keep a hashmap which stores the characters in string as keys and their positions as values, and keep two pointers which define the max substring. move the right pointer to scan through the string , and meanwhile update the hashmap. If the character is already in the hashmap, then move the left pointer to the right of the same character last found. Note that the two pointers can only move forward.
+-
+
+```java
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if (s.length() == 0) return 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        int max = 0;
+        for(int i = 0, j = 0; i < s.length(); i ++){
+            if (map.containsKey(s.charAt(i))){
+                j = Math.max(j,map.get(s.charAt(i))+1);
+            }
+            map.put(s.charAt(i),i);
+            max = Math.max(max,i-j+1);
+        }
+       return max;
+    }
+}
+
+```
+
+### Approach 3: Cache + sliding window
+
+```java
+public int lengthOfLongestSubstring(String s) {
+        int result = 0;
+        int[] cache = new int[256];
+        for (int i = 0, j = 0; i < s.length(); i++) {
+            j = (cache[s.charAt(i)] > 0) ? Math.max(j, cache[s.charAt(i)]) : j;
+            cache[s.charAt(i)] = i + 1;
+            result = Math.max(result, i - j + 1);
+        }
+        return result;
+}
+
+
+```
