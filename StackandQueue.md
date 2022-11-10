@@ -9,6 +9,10 @@
 
 ## Monotonic Stack
 
+Monotonous stack can help us find first largest element in O(n) time complexity.
+
+> Store currently unsolved elements, later if there is a bigger number, withdraw the unsolved elements and get the answer.
+
 ## 496. Next Greater Element I
 
 Brutal force approach: loop through nums1, and then nested loop through nums2
@@ -52,4 +56,26 @@ The stack will first contain [9, 8, 7, 3, 2, 1] and then we see 6 which is great
         return nums1;
 
     }
+```
+
+## 739. Daily Temperatures
+
+- Time: O(N)
+- Space: O(N)
+
+```java
+public int[] dailyTemperatures(int[] temperatures) {
+        int len = temperatures.length;
+        int[] ans = new int[len];
+        //stack store the index of the next biggest element
+        Stack<Integer> stack = new Stack<>();
+        for(int i = 0 ; i < len; i ++){
+            while(stack.isEmpty() == false && temperatures[i] > temperatures[stack.peek()]){
+                int index = stack.pop();
+                ans[index] = i - index;
+            }
+            stack.push(i);
+        }
+        return ans;
+}
 ```
