@@ -79,3 +79,36 @@ public int[] dailyTemperatures(int[] temperatures) {
         return ans;
 }
 ```
+
+## 503. Next Greater Element II
+
+- Time: O(2n)
+- Space: O(n)
+
+```
+    no need to use hashmap bc there's only one nums
+    circular -->
+    'aeiou' 'eiouaeioua' duplicate the string, and see if contains.
+    [1,2,1]
+    extend the array with an extended for loop
+```
+
+```java
+public int[] nextGreaterElements(int[] nums) {
+        int len = nums.length;
+        int[] ans = new int[len];
+        Arrays.fill(ans, -1);
+        Stack<Integer> stack = new Stack<>();
+
+        for(int i = 0; i < len*2; i ++){
+          while(!stack.isEmpty() && nums[stack.peek()] < nums[i%len]){
+              ans[stack.pop()] = nums[i % len];
+          }
+          if (i < len){
+              stack.push(i);
+          }
+        }
+
+        return ans;
+}
+```
