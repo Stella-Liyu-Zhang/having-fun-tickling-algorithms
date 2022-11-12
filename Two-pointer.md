@@ -252,3 +252,47 @@ public int lengthOfLongestSubstring(String s) {
 
 
 ```
+
+## Container With Most Water
+
+```
+    Max =0 ;
+    Left and right pointer
+    width = 8 - 0 = 8
+    height = min (1,7)
+    area = 8*1 = 8
+    area = (R-L) * min(height[L], height[R])
+
+    if left == right, move both left and right foward!
+    a small optimization tho
+
+    always move the smaller height
+    if we have a smaller height, we don't care about it
+    so we could have a higher potential.
+```
+
+- Time: O(n), meet in the middle, when they become equal, we are down iterate, touch each element a single element
+- Space: O(1)
+
+```java
+    public int maxArea(int[] height) {
+        int left = 0;
+        int right = height.length - 1;
+        int max = Integer.MIN_VALUE;
+
+        while(left < right){
+            int area = (right - left) * Math.min(height[left], height[right]);
+            max = Math.max(max, area);
+            if (height[left] < height[right]){
+                left ++;
+            }else if (height[right] < height[left]){
+                right --;
+            }else{
+                left ++;
+                right --;
+            }
+        }
+
+        return max;
+    }
+```

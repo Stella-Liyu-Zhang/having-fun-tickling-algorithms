@@ -1,6 +1,6 @@
 ## Why BS?
 
-- I want to build software that empowers the infrastructure of people's daily life, from constructions, to
+- I want to build software that empowers the infrastructure of people's daily life, from constructions, to Oil, gas, and infrastructure industry.
 - My friend Yixuan who worked at BS during summer 2021 had received amazing mentorship.
 - He told me he was working on the Simulacra team to redesign the destributed system in C# to make the software more scalable. He also restructured the in-memory data management system for faster querying and and lighter memory usage. Optimizing clustering algorithms for the “rendering physical items on the map” feature to run 1000x faster.
 
@@ -11,13 +11,15 @@ Tech stacks:
 
   > RabbitMQ is a messaging broker - an intermediary for messaging. It gives your applications a common platform to send and receive messages, and your messages a safe place to live until received.
 
-- Oil, gas, construction and infrastructure industry.
 - Took initiative to design Microfrontends architecture to extend existing product in a scalable, and maintainable way.
 - a commercial Design Review and Commenting software
+  - Microfrontends are what we get when we bring the microservice approach to the frontend. In other words, a microfrontend is made of components — owned by different teams — that can be deployed independently. These components are assembled to create a consistent user experience.
 
 ## Resume Walkthrough
 
-## Coursework: dropped operating systems, it was supposed to be taken in FA22
+## Coursework
+
+dropped operating systems, it was supposed to be taken in FA22
 
 ## Experience
 
@@ -50,11 +52,36 @@ write down my thinking process
   - My server was implemented in a concurrent manner, so that it can process multiple client requests overlapping in time.
 - Why using web components with Vanilla JS? Which web components did you build?
   - Pop up modal, grid, product page card, main app.js component, form and table component
+
+```javascript
+// JavaScript code
+function search_animal() {
+  let input = document.getElementById("searchbar").value;
+  input = input.toLowerCase();
+  let x = document.getElementsByClassName("animals");
+
+  for (i = 0; i < x.length; i++) {
+    if (!x[i].innerHTML.toLowerCase().includes(input)) {
+      x[i].style.display = "none";
+    } else {
+      x[i].style.display = "list-item";
+    }
+  }
+}
+```
+
 - What's the user group for the web app? What features does it include? What features have you built?
   - People with Glaukoma desease.
   - Dashboard of searching for the clinics nearest clinic that are using the particular medical device
 - Docker and Kubernete? How did you use them in deploying?
+  - For example, you can have two services − One service would contain nginx and mongoDB, and another service would contain nginx and redis. Each service can have an IP or service point which can be connected by other applications. Kubernetes is then used to manage these services.
 - How did you reduce response time of the RESTful APIs by 60%?
+  - Cache
+    - What is Caching?
+      - the process of storing copies of data in memory to allow applications to access and retrieve data faster.
+      - For example, if our queries require several operations, such as retrieving data from a database, performing calculations, retrieving additional data from other services, etc., we can use caching.
+      - With this, we process the data only once, store it in a cache and then retrieve it directly from the cache without performing all those costly operations. We will then periodically refresh the cache so that users can see updated information.
+  - If you have requests that frequently produce the same response, a cached version of the response avoids excessive database queries. The easiest way to cache responses is to periodically expire it, or force it to expire when certain data updates happen.
 
 ### humanID
 
@@ -75,8 +102,8 @@ write down my thinking process
   - Authentication application returns an access token
   - User logs in and access the resources of resource owner
 - How did you ship the payment platform from prototype with stripe integration?
-- 1. Online payment 2) Subscription
--
+- 1. Online payment
+- 2. Subscription
 
 ### Google CSRMP
 
@@ -88,6 +115,16 @@ write down my thinking process
 - algebraic geometry? Category theory and quantum computing
 - Difference between this experience and other ones?
   - in a SWE internhsips, there are deadlines where I'm pushed to
+
+### Tencent
+
+- Daily review of product features, functionality, clients’ demands, technical plans with PM and various teams.
+- Utilized Tencent Agile Product Development platform for product planning, demand analysis, task development progress tracking, and code quality assurance
+- Developed, maintained the dynamic UI of Financial risk monitoring platform with Vue.js, VueX, Vue-router, Axios, endpoints in Node.js.
+- Implemented Whistle with Switchy Omega to debug and proxy in Chrome.
+- Improved Web App’s popUp Table layout size reallocation for better usability and flexibility with Element-UI.
+- Designed and developed various security management and risk control features including dynamic user-specific page watermark, copy protection, access control distinguished by accounts, user behavior records.
+- Improved the security rate of the Backtracking Management Platform by 5%
 
 ### Undergraduate TA
 
@@ -112,12 +149,31 @@ write down my thinking process
 - MVP delivery in 6 weeks through prioritization
 - 1000+ daily activer users for menu browsing, online ordering, rewards program, client feedback
 - 120% in daily active users within the first month after launching the MVP.
+- toasttab online ordering system API
 
 ### Tech stacks
 
 MongoDB, AWS, Vue3, docker, postman, expressJS, NodeJS, GO,
 
 ### TripleC PM chair
+
+- Provided direct mentorship among 20 Product Managers and Tech Leads of over 10 software products.
+- Track the progress of each product through weekly PM/TL meetings; Provide feedback for each demo.
+- Make sure the development process on the right track for each product.
+- Fostered interaction among 500+ alumni to seek commercial and marketing resources for our products.
+
+## Questions for Interviewers
+
+- What they like about the company and what they wish could be improved
+- Where the company is heading in the next few years
+  Performance evaluation and career trajectory Internal mobility
+- Example projects for new grads
+- Most interesting/important technical challenges their team has faced
+- Planning process and development cycle
+- Important skills and qualities needed to succeed at their company
+- The answer to this question may seem obvious, but it’s not.
+- Most skills reside on a spectrum, and some companies prioritize one side over the other.
+- If you know the answer, you can prioritize discussing those specific traits in your interview.
 
 ## Problem 1:
 
@@ -175,8 +231,8 @@ Given an array A consisting of strings, your function should calculate the lengt
 - S is a concatenation of some of the strings from A;
 - every letter in S is different.
 
-- Time: `O(n\*2^n)` N = number of elements in arr
-- Space: `O(n\*2^n)`
+- Time: `O(n*2^n)` N = number of elements in arr
+- Space: `O(n*2^n)`
 
 > Algo walk through:
 >
@@ -244,4 +300,59 @@ class Solution{
 
 ```
 
-7, 10 20 30 70
+## 1
+
+- integer N,
+- output integer M,
+  - M > N
+  - M < 9999999
+  - M%10 == 0
+
+```java
+n = n + 10;
+return n - n%10
+```
+
+## 2
+
+input: abc, N
+
+- output:
+
+```java
+ public static String compute(String s, int N){
+        int len = s.length();
+        int remainder = N % len; //length of extra string to concatenate
+        String ans = "";
+        for(int i = 0 ; i < N/len; i ++){
+            ans += s;
+        }
+        if (remainder > 0){
+            ans+=s.substring(0,remainder);
+        }
+        return ans;
+    }
+	public static void main(String[] args) {
+        System.out.println(compute("abc", 5));
+        System.out.println(compute("abcde", 35));
+        System.out.println(compute("abc", 1));
+	}
+```
+
+## Difference between TypeScript and JavaScript
+
+## F# versus java or OOP Languages
+
+## principles of Object oriented programming
+
+## abstraction
+
+## Recursion
+
+## How do you learn a new language?
+
+## How do you improve yourself?
+
+## How do you decide which framework/language to use while developing something?
+
+## system design
