@@ -30,21 +30,18 @@ longest: 3
 ```
 
 ```java
-public int findlongest (String s){
-    HashSet<Character> hashset = new HashSet<>();
-    int left = 0;
-    int right = 0;
-    int longest = Math.MIN_VALUE;
-    for(char c: s.toCharArray()){
-        if (hashset.contains(c)){
-            hashset.remove(s.charAt(left));
-            left ++;
-        }
-        hashset.put(c);
-        longest = Math.max(longest, right-left +1);
-        right ++;
+int a_pointer = 0, b_pointer = 0, max = 0;
+HashSet<Character> hs = new HashSet<>();
 
-    }
-    return longest;
-}
+        while (b_pointer < s.length()){
+            if (!hs.contains(s.charAt(b_pointer))){
+                hs.add(s.charAt(b_pointer));
+                max = Math.max(max, hs.size());
+                b_pointer ++;
+            }else{
+                hs.remove(s.charAt(a_pointer));
+                a_pointer ++;
+            }
+        }
+        return max;
 ```
