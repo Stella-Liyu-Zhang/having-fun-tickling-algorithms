@@ -284,6 +284,43 @@ Given an integer array nums of 2n integers, group these integers into n pairs (a
   }
 ```
 
-## StringBuilder
+## StringBuilder - append versus insert
 
-The append method always adds these characters at the end of the existing character sequence, while the insert method adds the characters at a specified point.
+The `append` method always adds these characters at the end of the existing character sequence,
+
+the `insert` method adds the characters at a specified point.
+
+## char to int
+
+### 1) Java char to int Example: Get ASCII value
+
+```java
+
+char c='a';
+char c2='1';
+int a=c;
+int b=c2;
+System.out.println(a);
+System.out.println(b);
+97
+49
+```
+
+### 2) Java char to int Example: Character.getNumericValue()
+
+```java
+char c='1';
+int a=Character.getNumericValue(c);
+System.out.println(a);
+1
+```
+
+### 3) Java char to int Example: String.valueOf()
+
+```java
+char c='1';
+int a=Integer.parseInt(String.valueOf(c));
+System.out.println(a);
+
+1
+```
