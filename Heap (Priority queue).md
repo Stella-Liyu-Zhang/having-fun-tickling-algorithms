@@ -48,3 +48,88 @@ System.out.println(s1.compareTo(s5));//2 because "h" is 2 times greater than "f"
 ## Queue where the add and offer methods are different
 
 If a collection refuses to add a particular element for any reason other than that it already contains the element, it must throw an exception (rather than returning false). This preserves the invariant that a collection always contains the specified element after this call returns.
+
+## 253. Meeting Rooms II
+
+- Question
+  Given an array of meeting time intervals consisting of start and end times `[[s1,e1],[s2,e2],...] (si < ei)`, find the minimum number of conference rooms required.
+
+For example, Given `[[0, 30],[5, 10],[15, 20]]`, return `2`.
+
+### minHeap + sort
+
+```java
+/*
+  - sort the intervals according to the 0 index (starting time) in an ascending order
+   [0, 30],[5, 10],[15, 20]
+
+O(m log m)
+O(m)
+*/
+    public int minMeetingRooms(int[][] intervals) {
+        if (intervals.length == 0){
+                return 0;
+        }
+        Arrays.sort(intervals, (s1,s2) -> Integer.Compare(s1[0], s2[0])); //mlogm
+        PriorityQueue<Integer> pq = new Queue<>();
+        int rooms = 0;
+        for(int i = 0; i < intervals.length; i ++){//m
+                pq.offer(intervals[i][1]); //logn
+                if (intervals[i][0] < pq.peek()){//O(1)
+                        rooms ++;
+                }else{//no overlaps exist
+                        pq.poll(); //logn
+                }
+        }
+
+        return rooms;
+    }
+```
+
+### 2-pointer + sort
+
+```java
+/*
+extract the two arrays representing start end time
+[0, 30],[5, 10],[15, 20]
+[0,5, 15]
+[10,20,30]
+i = 0
+j = 0
+activate = 0
+max = 0
+len = 3
+
+we sort start time and end time.
+initialize the start and end index as 0.
+if start time < end time, means we have a meeting in active, active++.
+else active--.
+We need to record the max number of the active room.
+*/
+public int minMeetingRooms(int[][] intervals) {
+        int len = intervals.length;
+        int[] startTime = new int[len];
+        int[] endTime = new int[len];
+        int i = 0;
+        for(int[] interval: intervals){
+                startTime[i] = interval[0];
+                endTime[i] = interval[1];
+        }
+
+        Array.sort(startTime);
+        Array.sort(endTime);
+        int i = 0, j = 0, max = 0, active = 0;
+        while (i < len && j < len){
+                if (startTime[i] < endTime[j]){
+                        active ++;
+                        i ++;
+                }else{
+                        active --;
+                        j ++;
+                }
+                max = Math.max(max, active);
+        }
+        return max;
+
+}
+```
