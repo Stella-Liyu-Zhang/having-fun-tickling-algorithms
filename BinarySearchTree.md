@@ -11,7 +11,15 @@ A binary search tree (BST), a special form of a binary tree, satisfies the binar
 
 Like a normal binary tree, we can traverse a BST in preorder, inorder, postorder or level-order. However, it is noteworthy that inorder traversal in BST will be in ascending order. Therefore, the inorder traversal is the most frequent used traversal method of a BST.
 
-## Learn one iterative inorder traversal, apply it to multiple tree questions (Java Solution)
+## DFS
+
+- Inorder: left, root, right
+- Preorder: root, left child, right child OR root, right child, left child
+- Postorder: left child, right child, root OR right child, left child, root
+
+## BFS
+
+- level order
 
 ## LinkedList in Binary Tree (BFS + DFS + Preorder Traversal)
 
@@ -249,5 +257,86 @@ public int sumOfLeftLeaves(TreeNode root) {
     }
     private boolean isLeaf(TreeNode node){
         return (node.left == null && node.right == null);
+    }
+```
+
+## 98. Validate Binary Search Tree
+
+### Approach 1: In-order Traversal
+
+- Time: O(n)
+  - touches one node only once
+- Space: O(n)
+  - stack memory allocation
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ duplicates are not allowed
+ left < root
+ right > root
+
+
+ traverse all the way to the left side, the smallest value node in the entire tree
+ pushing values onto the stack.
+ fill up the stack, pop stack values off, keep referecnign more and more parent nodes to make sure the orders are in place
+
+ stack : 4 2 1
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        //in-order: sorted from left, root, right
+        if (root == null){
+            return true;
+        }
+        Stack<TreeNode> stack = new Stack();
+        TreeNode pre = null;
+        while (! stack.isEmpty() || root != null){
+            while (root != null){
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (pre != null && root.val <= pre.val){
+                return false;
+            }
+            pre = root;
+            root = root.right;
+        }
+        return true;
+    }
+}
+```
+
+### Approach 2: Recursion
+
+- time: O(n) make sure to traverse all the nodes
+- Space: O(n)
+
+```java
+    public boolean isValidBST(TreeNode root) {
+        return isValid(root, null, null);
+    }
+
+    public boolean isValid(TreeNode root, Integer max, Integer min){
+        if (root == null){
+            return true;
+        }else if (min != null && root.val <= min || max != null && root.val >= max){
+            return false;
+        }else{
+            return isValid(root.left, root.val, min) && isValid(root.right, max, root.val);
+        }
     }
 ```
