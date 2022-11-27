@@ -392,3 +392,55 @@ class Solution {
 }
 
 ```
+
+## 230. Kth Smallest Element in a BST
+
+### Approach 1: Iterative with stack
+
+- Time complexity: `O(H + k)`, where H is a tree height. This complexity is defined by the stack, which contains at least `H + k` elements, since before starting to pop out one has to go down to a leaf.
+  - This results in `O(logN+k)` for the balanced tree and `O(N + k)` for completely unbalanced tree with all the nodes in the left subtree.
+- Space complexity: `O(H)` to keep the stack, where HH is a tree height.
+  - That makes `O(N)` in the worst case of the skewed tree, and `O(logN)` in the average case of the balanced tree.
+
+```java
+ public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+
+        while(root != null || stack.isEmpty() == false){
+            while(root != null){
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (--k == 0){
+                break;
+            }
+            root = root.right;
+        }
+        return root.val;
+
+    }
+```
+
+### Approach 2: Recursion
+
+```java
+class Solution {
+    public int kthSmallest(TreeNode root, int k) {
+        //The idea is to build an inorder traversal of BST which is an array sorted in the ascending order.
+        //Now the answer is the k - 1th element of this array.
+        ArrayList<Integer> ans = new ArrayList<>();
+        inOrder(ans, root);
+        return ans.get(k-1);
+    }
+    //inorder traversal is left, root, right, which would be sorting the nodes in an ascending order
+
+    public void inOrder(List<Integer> ans, TreeNode root){
+        if (root != null){
+            inOrder(ans, root.left);
+            ans.add(root.val);
+            inOrder(ans, root.right);
+        }
+    }
+}
+```
