@@ -340,3 +340,55 @@ class Solution {
         }
     }
 ```
+
+## 94. Binary Tree Inorder Traversal
+
+### Approach 1: Iterating method using Stack
+
+- time: O(n)
+- Space: O(n)
+
+```java
+ public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null){
+            return list;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        while(root != null || !stack.isEmpty()){
+            while(root != null){
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+
+            list.add(root.val);
+            root = root.right;
+        }
+        return list;
+    }
+```
+
+### Approach 2: Recursion
+
+- time: O(n)
+- Space: O(n)
+
+```java
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        recur(root, res);
+        return res;
+    }
+
+    public void recur(TreeNode root, List<Integer> res){
+        if (root != null){
+            recur(root.left, res);
+            res.add(root.val);
+            recur(root.right, res);
+        }
+    }
+}
+
+```
