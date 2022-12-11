@@ -128,36 +128,36 @@ class Solution {
 
      time: O(m), went through each character only once
      */
+   class Solution {
     public int calculate(String s) {
-        int sign = 1;
-        int sum = 0;
-
         Stack<Integer> stack = new Stack<>();
+        int sum = 0;
+        int sign = 1;
 
         for(int i = 0; i < s.length(); i ++){
-            //number
-            if (s.charAt(i) >= '0' && s.charAt(i) <= '9'){
-                //9 or 999
-                int num = 0;
-                while (i < s.length() && s.charAt(i) >= '0' && s.charAt(i) <= '9'){
-                    num = num*10 + s.charAt(i) - '0';
-                    i ++;
+                //a number, 9 , 999
+                if (s.charAt(i)-'0' <= 9 && s.charAt(i)-'0' >=0){
+                    int num = 0; //999, get the actual number of concatenated digits
+                    while( i < s.length() &&s.charAt(i)-'0' <= 9 && s.charAt(i)-'0' >=0 ){
+                        num = num*10 + s.charAt(i) - '0';
+                        i ++;
+                    }
+                    sum += num*sign;
+                    i --; //here, i is pointing to the digit after the number, so we want to move pointer back once.
+                }else if (s.charAt(i) == '-'){
+                    sign = -1;
                 }
-                sum += num*sign;
-                i --;
-            }else if (s.charAt(i) == '+'){
-                sign = 1;
-            }else if (s.charAt(i) == '-'){
-                sign = -1;
-            }else if (s.charAt(i) == '('){
-                stack.push(sum);
-                stack.push(sign);
-                sum = 0;
-                sign = 1;
-            }else if (s.charAt(i) == ')'){
-                sum = stack.pop() *sum;
-                sum += stack.pop();
-            }
+                else if (s.charAt(i) == '+'){
+                    sign = 1;
+                }else if (s.charAt(i) == '('){
+                    stack.push(sum);
+                    stack.push(sign);
+                    sum = 0;
+                    sign = 1;
+                }else if (s.charAt(i) == ')'){
+                    sum = stack.pop()*sum;
+                    sum += stack.pop();
+                }
         }
         return sum;
     }
