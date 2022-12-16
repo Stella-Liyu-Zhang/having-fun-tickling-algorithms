@@ -205,9 +205,30 @@ We proceed by recursive method.
 
 ![](assets/328_Odd_Even.svg)
 
-Time complexity : O(n)O(n). There are total nn nodes and we visit each node once.
+Time complexity : O(n). There are total nn nodes and we visit each node once.
 
-Space complexity : O(1)O(1). All we need is the four pointers.
+Space complexity : O(1). All we need is the four pointers.
+
+```java
+    public ListNode oddEvenList(ListNode head) {
+//         head -> odd
+//         head.next -> even
+//         head.next.next -> odd
+
+
+        if (head == null) return null;
+        ListNode odd = head, even = head.next, evenHead = even;
+
+        while (even!= null && even.next != null){
+            odd.next = even.next;
+            odd = odd.next;
+            even.next = odd.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+        return head;
+    }
+```
 
 ## Introduction - Doubly Linked List
 
