@@ -28,3 +28,26 @@ class Solution {
         return head;
     }
 }
+
+// Latest Solution
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        // [1,2,3,4,5]
+        if (head == null)
+            return null;
+
+        ListNode odd = head;
+        ListNode even = head.next;
+        ListNode evenHead = even;
+
+        while (even != null && even.next != null) {
+            odd.next = odd.next.next;
+            odd = odd.next;
+
+            even.next = even.next.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+        return head;
+    }
+}
