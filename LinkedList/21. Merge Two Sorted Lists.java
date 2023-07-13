@@ -27,8 +27,9 @@ class Solution {
             return list2;
         }
     }
+}
 
-    // Iterative solution
+// Iterative solution
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         // [1,2,4], list2 = [1,3,4]
