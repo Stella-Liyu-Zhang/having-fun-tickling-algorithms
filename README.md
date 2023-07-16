@@ -12,10 +12,6 @@ Questions by difficulties
 
 Topic-related notes
 
-You need to see documentation again. You can see this cheatsheet
-
-In your case you need to make second line like in example below:
-
 - [Math questions](math.md)
 - [General stuff to remember](general%20stuff%20to%20remember.md)
 - [Sorting algorithm](Sort.md)
