@@ -1,5 +1,8 @@
 class Solution {
-
+    /*
+    Time: O(M*N)
+    Space: O(m*n
+    */
     private int[][] directions = {{-1,0} , {0,-1}, {1,0}, {0,1}}; 
 
     public int orangesRotting(int[][] grid) {
