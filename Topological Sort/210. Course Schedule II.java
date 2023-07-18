@@ -1,9 +1,8 @@
 class Solution {
-    public boolean canFinish(int numCourses, int[][] prerequisites) {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
         int[] indegree = new int[numCourses]; //how many prerequisites a particular class have
 
         for(int[] pre: prerequisites){
-            //indegree
             indegree[pre[0]] ++;
         }
 
@@ -15,11 +14,14 @@ class Solution {
             }
         } 
         if(zeroDegree.isEmpty()){
-            return false;
+            return new int[]{};
         }
+        int[] order = new int[numCourses];
+        int i = 0;
         while(!zeroDegree.isEmpty()){
             Iterator<Integer> it = zeroDegree.iterator();
             int course = it.next();
+            order[i++] = course;
             zeroDegree.remove(course);
             for(int[] pre: prerequisites){
                 if (course == pre[1]){
@@ -33,9 +35,9 @@ class Solution {
 
         for(int num: indegree){
             if(num != 0){
-                return false;
+                return new int[]{};
             }
         }
-        return true;
+        return order;
     }
 }
