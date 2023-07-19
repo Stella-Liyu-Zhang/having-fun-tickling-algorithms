@@ -20,9 +20,6 @@ class Solution {
         if (nums.length == 1){
             return nums[0];
         }
-        if (nums.length == 2){
-            return Math.max(nums[0], nums[1]);
-        }
         
         int[] dp = new int[nums.length];
         dp[0] = nums[0];
@@ -32,4 +29,20 @@ class Solution {
         }
         return dp[dp.length-1];
     }
+    /*
+    Solution 2:
+    class Solution {
+        public int rob(int[] nums) {
+            int prevNo = 0;
+            int prevYes = 0;
+            for(int n : nums){
+                int temp = prevNo;
+                prevNo = Math.max(prevNo, prevYes);
+                prevYes = n + temp;
+            }
+            return Math.max(prevNo,prevYes);
+        }
+    }
+
+    */
 }
