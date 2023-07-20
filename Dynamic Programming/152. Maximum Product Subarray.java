@@ -1,7 +1,11 @@
 class Solution {
     public int maxProduct(int[] nums) {
-        // Dynamic programming
-
+        if (nums.length == 0){
+            return 0;
+        }
+        if (nums.length == 1){
+            return nums[0];
+        }
         // store the result that is the max we have found so far
         int maxproduct = nums[0];
 
