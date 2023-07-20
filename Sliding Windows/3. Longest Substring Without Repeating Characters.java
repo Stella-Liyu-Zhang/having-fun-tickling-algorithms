@@ -25,6 +25,28 @@ class Solution {
             }
         }
         return max;
-
     }
 }
+
+//Second attempt
+class Solution {
+    /*Time: O(N), Space: O(N)*/
+    public int lengthOfLongestSubstring(String s) {
+        Set<Character> hs = new HashSet<>();
+        int left = 0, right = 0;
+        int max = 0;
+        while(right < s.length()){
+            char c = s.charAt(right);
+            if (!hs.contains(c)){
+                hs.add(c);
+                right ++;
+                max = Math.max(hs.size(), max);
+            }else{
+                hs.remove(s.charAt(left));
+                left ++;
+            }
+        }
+        return max;
+
+    }
+} 
