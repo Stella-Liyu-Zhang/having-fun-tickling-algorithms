@@ -1,41 +1,54 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 /*
-The core idea of this algorithm:
-
-1.Each depth of the tree only select one node.
-2. View depth is current size of result list.
-
-Space O(n): Queue size we allocated
-Time O(n): went through the entire tree, n the number of nodes in our tree
+we can have a left child but the rightest in its level, doesn't need to be right child
+1)BFS 
+Queue, store treenodes [  4 , 5 , 6   ]
+res = [ 1, 3 , 6  ]
+size = 3， how many times we need to pull from the queue in order to perform our level order traversal
+i = 0, iterate from 0 to size-1, a loop telling us that we need to pull from our queue that many times
+i == size - 1, this is how we know we have the rightmost node from that level
+time: O(N), n is number of nodes in our tree
+Space: O(N), since our queue will grow to the size of our largest level containing N nodes
+2) DFS
 */
-    
 class Solution {
     public List<Integer> rightSideView(TreeNode root) {
-        //top to botton: breadth firsth search
-        List<Integer> visibleValues = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
         if (root == null){
-            return visibleValues;
+            return result;
         }
         Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root); 
-        
-        while(!queue.isEmpty()){
-            TreeNode curr = root;
+        queue.add(root);
+        while (queue.isEmpty() == false){
             int size = queue.size();
             for(int i = 0; i < size; i ++){
-                curr = queue.remove();
-                if (i == size - 1){
-                    visibleValues.add(curr.val);
+                TreeNode node = queue.poll();
+                if (i == size-1){
+                    result.add(node.val);
                 }
-                if(curr.left != null){
-                    queue.add(curr.left);
+                if (node.left != null){
+                    queue.add(node.left);
                 }
-                if(curr.right != null){
-                    queue.add(curr.right);
+                if (node.right != null){
+                    queue.add(node.right);
                 }
             }
         }
-        return visibleValues;
-        
+        return result;
     }
 }
 
