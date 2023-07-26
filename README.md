@@ -1,4 +1,4 @@
-# Algorithms and Data Structure
+Welcome to having fun tickling algorithms, and let's get started!
 
 ## Table of Contents
 
