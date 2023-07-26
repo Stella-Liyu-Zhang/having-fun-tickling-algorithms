@@ -20,6 +20,7 @@ Topic-related notes
   - [Binary Search](BinarySearch.md)
   - [Sliding Window](./Sliding%20window.md)
 - [String](string.md)
+  - [Substring problems](./Substring.md)
 - [Linked List](LinkedList.md)
 - [Binary Tree](BinaryTree.md)
 - [Binary Search Tree](BinarySearchTree.md)
