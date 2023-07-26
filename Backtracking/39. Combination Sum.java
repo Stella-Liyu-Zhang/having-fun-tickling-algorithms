@@ -12,13 +12,11 @@ class Solution {
         else if (remain == 0) {
             ans.add(new ArrayList<>(temp));
         } else {
-            for (int i = start; i < candidates.length; i++) { // note that should always start from start!!!! or there
-                                                              // will be duplicated stuff like [2,2,3], [3,2,2]
+            for(int i = start; i < candidates.length; i ++){
                 temp.add(candidates[i]);
-                backtrack(ans, candidates, remain - candidates[i], i, temp); // we don't start from i + 1, since it
-                                                                             // could be duplicate/reused
+                backtrack(lists, temp, candidates, i, remain-candidates[i]);
                 temp.remove(temp.size() - 1);
             }
         }
     }
-}
+} 
