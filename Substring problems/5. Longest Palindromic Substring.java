@@ -14,9 +14,9 @@ class Solution {
             extendPalindrome(s,i,i);
             extendPalindrome(s,i,i+1);
         }
-        return s.substring(low, low+maxLen);
+        return s.substring(low, low + maxLen);
     }
-    
+
     private void extendPalindrome(String s, int left, int right){
         while(left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)){
             left --;
@@ -24,7 +24,7 @@ class Solution {
         }
         if(maxLen < right - left - 1){
             low = left + 1;
-            maxLen = right-left-1;
+            maxLen = right - left - 1;
         }
     }
 }
