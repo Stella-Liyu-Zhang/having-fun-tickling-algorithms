@@ -26,7 +26,7 @@ class Solution {
         
         sum = sum1+sum2;
         ListNode ans;
-        ans.val = sum1
+        ans.val = sum1;
         
     }
 }
