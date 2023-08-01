@@ -14,7 +14,6 @@ class Solution {
         backtrack(nums, powerset, 0, new ArrayList<Integer>());
         return powerset;
     }
-
     // generate the powerset of the subset
     /*
      * take the index of first element to add
