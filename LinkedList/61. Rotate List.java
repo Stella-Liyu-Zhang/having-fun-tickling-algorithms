@@ -10,9 +10,9 @@
  */
 class Solution {
     public ListNode rotateRight(ListNode head, int k) {
-        if (head == null)
-            return null;
-
+        if (head == null || head.next == null){
+            return head;
+        }
         ListNode fast = head;
         ListNode slow = head;
         int length = 1;
@@ -26,6 +26,7 @@ class Solution {
         for (int i = 1; i < length - k % length; i++) {
             slow = slow.next;
         }
+
         // rotate the head and the slow
         fast.next = head;
         head = slow.next;
@@ -34,3 +35,11 @@ class Solution {
         return head;
     }
 }
+
+/*
+Time complexity : O(N)\mathcal{O}(N)O(N) where NNN is a number
+of elements in the list.
+
+Space complexity : O(1)\mathcal{O}(1)O(1) since it's a
+constant space solution.
+*/
