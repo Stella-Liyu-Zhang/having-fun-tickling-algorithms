@@ -50,3 +50,35 @@ class Solution {
 Time: O(M*N)
 Space: O(M+N)
 */
+
+class Solution {
+    public String decodeString(String s) {
+        Stack<String> wordStack = new Stack();
+        Stack<Integer> numberStack = new Stack();
+
+        StringBuilder res = new StringBuilder();
+        int num = 0;
+        for(char c: s.toCharArray()){
+            if(Character.isDigit(c)){
+                num  = num*10 + c-'0';
+            }else if (Character.isLetter(c)){
+                res.append(c);
+            }else if (c == '['){
+                wordStack.push(res.toString());
+                numberStack.push(num);
+                res = new StringBuilder();
+                num = 0;
+            }else{
+                int count = numberStack.pop();
+                StringBuilder duplicatedWord = new StringBuilder(wordStack.pop());
+                for(int i = 0; i < count; i ++){
+                    duplicatedWord.append(res);
+                }
+                res = duplicatedWord;
+
+            }
+        }
+
+        return res.toString();
+    }
+}
