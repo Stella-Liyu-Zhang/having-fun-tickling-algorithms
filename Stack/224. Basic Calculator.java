@@ -44,3 +44,37 @@ class Solution {
         return sum;
     }
 }
+
+//second attempt
+class Solution {
+    public int calculate(String s) {
+        Stack<Integer> stack = new Stack();
+
+        int sign = 1;
+        int sum = 0;
+        for(int i = 0; i < s.length(); i++){
+            if (Character.isDigit(s.charAt(i))){
+                int num = 0; //num represents the actual number of concatenated digits
+                while(i < s.length() && Character.isDigit(s.charAt(i))){
+                    num = num*10 + s.charAt(i) - '0';
+                    i ++;
+                }
+                sum += num*sign;
+                i --; //here, i is pointing to the digit after the number, so we want to move pointer back once.            
+            }else if (s.charAt(i)  == '+'){
+                sign = 1;
+            }else if (s.charAt(i)  == '-'){
+                sign = -1;
+            }else if (s.charAt(i)  == '('){
+                stack.push(sum);
+                stack.push(sign);
+                sum = 0;
+                sign = 1;
+            }else if (s.charAt(i)  == ')'){
+                sum = stack.pop()*sum;
+                sum += stack.pop();
+            }
+        }
+        return sum;
+    }
+}
