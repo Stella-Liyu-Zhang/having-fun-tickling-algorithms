@@ -28,3 +28,20 @@ class Solution {
         }
     }
 }
+
+//second attempt
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> subsets = new ArrayList<>();
+        backtrack(nums, subsets, new ArrayList<>(), 0);
+        return subsets;
+    }
+    private void backtrack(int[] nums, List<List<Integer>> superset, List<Integer> set, int index){
+        superset.add(new ArrayList<>(set));
+        for(int i = index; i < nums.length; i ++){
+            set.add(nums[i]);
+            backtrack(nums, superset, set, i+1);
+            set.remove(set.size() - 1);
+        }
+    }
+}
