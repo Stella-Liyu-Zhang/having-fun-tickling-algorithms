@@ -82,3 +82,58 @@ class Solution {
         return res.toString();
     }
 }
+
+// Third attempt
+class Solution {
+    /*
+    k[encoded] => repeat encoded k times
+
+    3[a]2[bc]
+    aaabcbc
+    3[a2[c]]
+    accaccacc
+
+    1. straight forward solution
+    a lot of nested brackets
+    find the innermost bracket first, and will be the first string that i decode.
+
+
+    //optimal solution
+    as soon as we see a closing bracket, find the first opennign bracket, and that would be the first string to decode first
+    stack: LIFO (last in first out)
+    Number stack
+    String stack
+
+    need to put it back into the stack after decoding a string
+    */
+    public String decodeString(String s) {
+        Stack<Integer> countStack = new Stack();
+        Stack<String> stringStack = new Stack();
+        
+        int num = 0;
+        StringBuilder word = new StringBuilder();
+
+        for(int i = 0; i < s.length(); i ++){
+            char curr = s.charAt(i);
+            if(Character.isDigit(curr)){
+                num = num*10 + curr - '0';
+            }else if (Character.isLetter(curr)){
+                word.append(curr);
+            }else if (curr == '['){
+                stringStack.push(word.toString());
+                word = new StringBuilder();
+                countStack.push(num);
+                num = 0;
+            }else{
+                int count = countStack.pop();
+                StringBuilder sub = new StringBuilder(stringStack.pop());
+                for(int j = 0; j < count; j ++){
+                    sub.append(word);
+                }
+                word = sub;
+            }
+        }
+        return word.toString();
+        
+    }
+}
