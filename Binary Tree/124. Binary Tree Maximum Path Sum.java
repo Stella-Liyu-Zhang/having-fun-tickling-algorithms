@@ -65,3 +65,44 @@ class Solution {
         return maxOneNodeRoot;
     }
 }
+
+//another way to solve the problem:
+class Solution {
+    /*
+    bottom up approach
+    left, right and current
+    postorder traversal: left, right, currnode
+    nodes were put from bottom to top.
+    max = -infinity
+
+    bound our sum to 0 to ensure we get the max!
+    each time we get the maximum of the current maximum and 0
+    10 + max(-5,0) = 10!!
+
+    max between left and right
+
+    Time: O(n)
+    postorder, touch all the nodes for one single time
+    Space: O(H)
+    */
+    private int max = Integer.MIN_VALUE;
+
+    public int maxPathSum(TreeNode root) {
+        //Set it to minvalue just in case that all the nodes are negative
+        postOrder(root);
+        return max;
+    }
+
+    private int postOrder(TreeNode root){
+        if (root == null){
+            return 0;
+        }
+        //bound to 0.
+        int left = Math.max(0, postOrder(root.left));
+        int right = Math.max(0, postOrder(root.right));
+        
+        int curr = left+right+root.val;
+        max = Math.max(curr,max);
+        return Math.max(left,right) + root.val;
+    }
+}
