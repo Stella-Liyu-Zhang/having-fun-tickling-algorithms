@@ -17,3 +17,27 @@ class Solution {
         return count;
     }
 }
+
+//second solution: hashmap one pass
+class Solution {
+    /*
+    key: nums[i] 
+    value: occurance
+    Time: O(n)
+    Space: O(n)
+    */
+    public int maxOperations(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap();
+        int count = 0;
+        for(int i: nums){
+            if(map.getOrDefault(k-i, 0) > 0){ //check complement element
+                map.put(k-i, map.get(k-i)-1); //make sure the occurence --
+                count ++;
+            }else{
+                //put current in the map
+                map.put(i, map.getOrDefault(i, 0) + 1);
+            }
+        }
+        return count;
+    }
+}
