@@ -13,22 +13,30 @@ class Solution {
      
      
     */
+class Solution {
+    /*
+    Greedy approach will not work by always picking the biggest one
+    6, 9, 6
+
+    Total loot at house (n) = MAX(total_loot[n-2] + loot[n], total_loot[n-1])
+
+    */
     public int rob(int[] nums) {
-        if (nums == null || nums.length == 0){
+        if(nums.length == 0){
             return 0;
         }
-        if (nums.length == 1){
+        if(nums.length == 1){
             return nums[0];
         }
-        
-        int[] dp = new int[nums.length];
-        dp[0] = nums[0];
-        dp[1] = Math.max(nums[0], nums[1]);
-        for(int i = 2; i < dp.length; i ++){
-            dp[i] = Math.max(dp[i-2] + nums[i], dp[i-1]);
+        int[] total = new int[nums.length + 1];
+        total[0] = nums[0];
+        total[1] = Math.max(nums[0], nums[1]);
+        for(int i = 2; i < nums.length; i ++){
+            total[i] = Math.max(total[i-2] + nums[i], total[i-1]);
         }
-        return dp[dp.length-1];
+        return total[nums.length-1];
     }
+}
     /*
     Solution 2:
     class Solution {
