@@ -137,3 +137,40 @@ class Solution {
         
     }
 }
+
+//second attempt
+class Solution {
+    /*
+    3[a2[c]]
+    numStack: 
+    wordStack: 
+
+    */
+    public String decodeString(String s) {
+        Stack<Integer> numStack = new Stack();
+        Stack<StringBuilder> wordStack = new Stack();
+        StringBuilder sb = new StringBuilder();
+        int num = 0;
+        for(char c: s.toCharArray()){
+            if(Character.isDigit(c)){
+                num = num*10 + c - '0';
+            }else if (Character.isAlphabetic(c)){
+                sb.append(c);
+            }else if (c == '['){
+                wordStack.add(sb);
+                sb = new StringBuilder();
+                numStack.add(num);
+                num = 0;
+            }else if (c == ']'){
+                int count = numStack.pop();
+                StringBuilder decodedString = wordStack.pop();
+                // decode currentK[currentString] by appending currentString k times
+                for(int i = 0; i < count; i ++){
+                    decodedString.append(sb);
+                }
+                sb = decodedString;
+            }
+        }
+        return sb.toString();
+    }
+}
