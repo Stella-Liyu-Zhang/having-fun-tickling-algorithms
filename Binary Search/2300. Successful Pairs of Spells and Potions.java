@@ -24,14 +24,14 @@ Thus, [4,0,3] is returned.
     }
     private int binarySearch (int[] potions, int spell, long success){
         int left = 0;
-        int right = potions.length ;
-        while(left < right){
+        int right = potions.length - 1;
+        while(left <= right){
             int mid = left + (right-left)/2;
             long product = (1l * spell) * potions[mid];
             if(product < success){
                 left = mid + 1;
             }else{
-                right = mid ;
+                right = mid -1;
             }
         }
         return left;
