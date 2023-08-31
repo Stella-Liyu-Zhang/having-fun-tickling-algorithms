@@ -1,3 +1,8 @@
+/*
+ime complexity: O(N) since we visit each node exactly once.
+
+Space complexity: O(log⁡N)
+*/
 class Solution {
     public TreeNode sortedArrayToBST(int[] nums) {
         if (nums.length == 0){
