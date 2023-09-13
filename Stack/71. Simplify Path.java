@@ -1,30 +1,30 @@
-
 class Solution {
+    /*
+    Time: O(N)
+
+    Space Complexity: O(N)
+    Actually, it's 2N because we have the array that contains the split components and then we have the stack.
+    */
     public String simplifyPath(String path) {
-        /**
-         * /.. : come out from the directory
-         * /nameOfDirectory : going into directory
-         * Time Complexity :- O(N)
-         * Space Complexity :- O(N)
-         **/
-        Stack<String> stack = new Stack<>();
-        StringBuilder ans = new StringBuilder();
-        for (String c : path.split("/")) {
-            if (stack.isEmpty() == false && c.equals("..")) {
-                // previous directory, popping off
-                stack.pop();
-            } else if (!c.equals("") && !c.equals(".") && !c.equals("..")) { // here, no one cares if the stack is empty
-                                                                             // or not, we just need to push something
-                                                                             // on to it.
-                stack.push(c);
+        Stack<String> stack = new Stack();
+        String[] components = path.split("/");
+
+        for(String dir: components){
+            if(dir.equals(".") || dir.isEmpty()){
+                continue;
+            }else if (dir.equals("..")){
+                if(stack.isEmpty() == false){
+                    stack.pop();
+                }
+            }else{
+                stack.push(dir);
             }
         }
-        if (stack.isEmpty())
-            return "/";
-        while (stack.isEmpty() == false) {
-            ans.insert(0, stack.pop());
-            ans.insert(0, "/");
+        StringBuilder sb = new StringBuilder();
+        for(String s: stack){
+            sb.append("/");
+            sb.append(s);
         }
-        return ans.toString();
+        return sb.length() > 0 ? sb.toString() : "/";
     }
 }
