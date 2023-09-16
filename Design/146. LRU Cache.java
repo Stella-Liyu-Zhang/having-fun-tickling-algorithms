@@ -1,81 +1,76 @@
 class LRUCache {
-    final Node head = new Node();
-    final Node tail = new Node();
-    Map<Integer, Node> nodeMap;
-    int cache_capacity;
+    int capacity;
+    HashMap<Integer, Node> map;
+    Node head = new Node(0,0);
+    Node tail = new Node(0,0);
+
+    class Node{
+        Node prev, next;
+        int key, value;
+
+        Node(int key, int value){
+            this.key = key;
+            this.value = value;
+        }
+    }
 
     public LRUCache(int capacity) {
-        // Initialize the LRU cache with positive size capacity.
-        nodeMap = new HashMap(capacity);
-        this.cache_capacity = capacity;
+        this.capacity = capacity;
+        map = new HashMap<>();
         head.next = tail;
         tail.prev = head;
     }
 
+    /*
+    check if exists in the map
+    access any value from the cache, we need to move data to the top of the cache
+    remove the node,and then insert it.
+    */
     public int get(int key) {
-        // Return the value of the key if the key exists, otherwise return -1.
-        int result = -1;
-        Node node = nodeMap.get(key);
-        if (node != null) { // move to the front of the cache
-            result = node.val;
-            remove(node);
-            add(node);
+        if(map.containsKey(key) ){
+            Node data = map.get(key);
+            remove(data);
+            insert(data);
+            return data.value;
         }
-        return result;
+        return -1;
     }
 
+    /*
+    if value is already present, we move it to the top
+    if the cache is full,
+    turn tail.prev --> least recently used 
+    */
     public void put(int key, int value) {
-        Node node = nodeMap.get(key);
-        if (node != null) {
-            remove(node);
-            node.val = value;
-            add(node);
-        } else {
-            if (nodeMap.size() == cache_capacity) {
-                nodeMap.remove(tail.prev.key); // remove from the hashmap
-                remove(tail.prev); // remove from the linkedlist
-            }
-            Node new_node = new Node();
-            new_node.key = key;
-            new_node.val = value;
-
-            nodeMap.put(key, new_node);
-            add(new_node);
+        //key already present, we remove it from the map.
+        if(map.containsKey(key)){
+            remove(map.get(key));
         }
-
+        //cache is full
+        //remove tail.prev,
+        if(capacity == map.size()){
+            remove(tail.prev);
+        }
+        insert(new Node(key, value));
     }
+    //delete a node from the linkedlist
+    void remove(Node node){
+        map.remove(node.key);
+        //remove from the linkedlist
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+    }
+    //store next to the head
+    void insert(Node node){
+        map.put(node.key, node);
 
-    public void add(Node node) {
-        // add to the front of the linkedlist, because we are removing from the tail
-        Node head_next = head.next;
+        Node headNext = head.next;
         head.next = node;
-        node.prev = head; // dummy node, doesn't represent value
-        node.next = head_next;
-        head_next.prev = node;
+        node.prev = head;
+        node.next = headNext;
+        headNext.prev = node;
     }
-
-    public void remove(Node node) {
-        // remove the node
-        Node next_node = node.next;
-        Node prev_node = node.prev;
-
-        next_node.prev = prev_node;
-        prev_node.next = next_node;
-    }
-
-    class Node { // doubly linkedlist has prev, next nodes specified.
-        int key;
-        int val;
-        Node prev;
-        Node next;
-    }
-
 }
-// linkedlist: delete/insert are constant time, and need ordering
-// hashmaps are unordered, need linkedlist to structure, put things in the
-// constant time, head.next = new node.
-// delete things, pop off the tail
-// doubly linkedlist: reference to the head and tail
 
 /**
  * Your LRUCache object will be instantiated and called as such:
