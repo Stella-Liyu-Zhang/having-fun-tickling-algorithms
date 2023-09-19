@@ -1,46 +1,26 @@
 class Solution {
     /*
-     * 1,2,3,4,5,6,7
-     * reverse all numbers 7654321
-     * reverse first k numbers 5671234
-     * reverse last n - k numbers
-     * 
-     */
+    reverse the array,
+    reverse the array from 0 to k-1,
+    reverse the array from k to nums.length - 1
+    [1,2,3,4,5,6,7],
+    [7,6,5,4,3,2,1], k = 3
+    [5,6,7,1,2,3,4]
+    */
     public void rotate(int[] nums, int k) {
-        k = k % nums.length;
-        reverse(nums, 0, nums.length - 1);
-        reverse(nums, 0, k - 1);
-        reverse(nums, k, nums.length - 1);
+        int n = nums.length;
+        k %= n;
+        rotateArray(nums, 0, n-1);
+        rotateArray(nums, 0, k-1);
+        rotateArray(nums, k, n-1);
     }
-
-    private void reverse(int[] nums, int i, int j) {
-        while (i < j) {
-            // reverse nums[i] and nums[j]
-            int temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
-            i++;
-            j--;
-        }
-    }
-}
-
-//I initially came across a bad solution 
-class Solution {
-    public void rotate(int[] nums, int k) {
-        if(nums.length == 1 || k > nums.length){
-            return;
-        }
-        int[] temp = new int[2*nums.length];
-        for(int i = 0; i < nums.length; i ++){
-            temp[i] = nums[i];
-        }
-        for(int i = nums.length; i < temp.length; i++){
-            temp[i] = nums[i-nums.length];
-        }
-
-        for(int i = 0; i < nums.length; i ++){
-            nums[i] = temp[i+nums.length-k];
+    private void rotateArray(int[] nums, int start, int end){
+        while(start < end){
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start ++;
+            end --;
         }
     }
 }
