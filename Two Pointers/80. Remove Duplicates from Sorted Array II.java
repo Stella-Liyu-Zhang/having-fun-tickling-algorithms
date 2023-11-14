@@ -1,22 +1,27 @@
 class Solution {
     /*
-    Time: O(N)
-    Space: O(1)
+    [1,1,1,2,2,3]
+
+    counter set to 1
+    if equal to previous one, we would increment counter
+    else, set counter to 1.
+    If counter is within 2, we would NOT Remove the current one, set it in place
+    Note that in the line "if(counter <= 2)", the 2 is the upper limit. 
     */
     public int removeDuplicates(int[] nums) {
-        int insertIndex = 1;
-        int countDups = 1;
+        int counter = 1;
+        int ptr = 1;
         for(int i = 1; i < nums.length; i ++){
             if(nums[i] == nums[i-1]){
-                countDups ++;
+                counter ++;
             }else{
-                countDups = 1;
+                counter = 1;
             }
-            if(countDups <= 2){
-                nums[insertIndex] = nums[i];
-                insertIndex ++;
+            if(counter <= 2){
+                nums[ptr] = nums[i];
+                ptr ++;
             }
         }
-        return insertIndex;
+        return ptr;
     }
 }
