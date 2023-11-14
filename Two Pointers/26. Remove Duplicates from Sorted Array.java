@@ -12,19 +12,15 @@ class Solution {
     start at 1
     [0,0,1,1,1,2,2,3,3,4]
     0 1 2
-
-    fast
-    slow
     */
     public int removeDuplicates(int[] nums) {
-        int insertIndex = 1;
+        int ptr = 1;
         for(int i = 1; i < nums.length; i ++){
-            if(nums[i-1] != nums[i]){
-                nums[insertIndex] = nums[i];
-                insertIndex ++;
+            if(nums[i] != nums[i-1]){
+                nums[ptr] = nums[i];
+                ptr ++;
             }
         }
-        return insertIndex;
-        
+        return ptr;
     }
 }
