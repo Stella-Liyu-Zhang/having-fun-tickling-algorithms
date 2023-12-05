@@ -19,6 +19,18 @@ public:
         }
         return ans;
     }
+    Solution 1.5:
+    uint32_t ReverseBits(uint32_t n)
+    {
+        uint32_t res;
+        for(int i = 0; i < 32; i ++){
+            res = res << 1;
+            //OR copies the rightmost bit of N to the corresponding position at res.
+            res = res | (n & 1);
+            n = n >> 1;
+        }
+        return res;
+    }
 
     Solution 2: divide and conquer
 
