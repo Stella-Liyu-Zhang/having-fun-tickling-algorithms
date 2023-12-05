@@ -2,35 +2,31 @@ class Solution
 {
 public:
     /*
-    starts from the back of both
-    0, 0 -> 0
-    1, 0 -> 1
-    1, 1 -> 0, carry = 1
-
-    Time: O(N)
-    Space: O(1)
+    2 pointers at end of a and b
+    add them
     */
     string addBinary(string a, string b)
     {
+        int aptr = a.length() - 1;
+        int bptr = b.length() - 1;
+        int remainder = 0;
         string ans = "";
-
-        int i = a.size() - 1, j = b.size() - 1, carry = 0;
-        while (i >= 0 || j >= 0 || carry > 0)
+        while (aptr >= 0 || bptr >= 0 || remainder != 0)
         {
-            if (i >= 0)
+            if (aptr >= 0)
             {
-                carry += a[i] - '0'; // convert the string to integer
-                i--;
+                remainder += a[aptr] - '0';
+                aptr--;
             }
-            if (j >= 0)
+            if (bptr >= 0)
             {
-                carry += b[j] - '0';
-                j--;
+                remainder += b[bptr] - '0';
+                bptr--;
             }
-            ans += (carry % 2) + '0';
-            carry /= 2;
+            ans += remainder % 2 + '0';
+            remainder = remainder / 2;
         }
-        reverse(ans.begin(), ans.end());
+        std::reverse(ans.begin(), ans.end());
         return ans;
     }
 };
