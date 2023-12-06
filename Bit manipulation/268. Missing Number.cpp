@@ -20,3 +20,24 @@ public:
         return missing;
     }
 };
+
+class Solution
+{
+public:
+    int missingNumber(vector<int> &nums)
+    {
+        std::unordered_set<int> set;
+        for (int n : nums)
+        {
+            set.insert(n);
+        }
+        for (int i = 0; i <= nums.size(); i++)
+        {
+            if (set.contains(i) == false)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+};
