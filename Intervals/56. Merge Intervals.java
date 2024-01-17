@@ -15,6 +15,7 @@ class Solution {
         output.add(curr);
 
         for(int[] intv: intervals){
+            //compare the current's end with the start of whatever's coming up, because current's start is always smaller.
             if (intv[0] <= curr[1]){
                 curr[1] = Math.max(curr[1], intv[1]);
             }else{
