@@ -1,28 +1,38 @@
 class Solution {
+    /*
+    intevals sorted in ascending by start
+    [2,5]
+    [[1,3],[6,9]]
+    [[1,5], [4,6] [7, 9]]
+    [1,5]
+
+    [3,5],[6,7],
+    [4,8]
+    O(N)
+    O(1)
+    THE Starting pointer of intervals <= new interval's ending point
+    */
     public int[][] insert(int[][] intervals, int[] newInterval) {
-        /*
-        Visit every single interval in the arraylist
-        keep updating the new interval itself
-        expand the intervals big, wide enough so that everything else still remains as original intervals.
-        */
-        //Make a new container
-        List<int[]> result = new ArrayList<>();
-        int i = 0;
-        int n = intervals.length;
-        while (i < n && intervals[i][1] < newInterval[0]){
-            result.add(intervals[i++]);
+        List<int[]> list = new ArrayList();
+        int size = intervals.length;
+
+        int pointer = 0;
+
+        while(pointer < size && intervals[pointer][1] < newInterval[0]){
+            list.add(intervals[pointer]);
+            pointer ++;
         }
-        while (i < n && intervals[i][0] <= newInterval[1]){
-            newInterval = new int []{
-                Math.min(intervals[i][0], newInterval[0]),
-                Math.max(intervals[i][1], newInterval[1])
-            };
-            i++;
+        while(pointer < size && intervals[pointer][0] <= newInterval[1]){
+            newInterval[0] = Math.min(newInterval[0], intervals[pointer][0]);
+            newInterval[1] = Math.max(newInterval[1], intervals[pointer][1]);
+            pointer ++;
         }
-        result.add(newInterval);
-        while(i < n ){
-            result.add(intervals[i++]);
+        list.add(newInterval);
+        while(pointer < size){
+            list.add(intervals[pointer]);
+            pointer ++;
         }
-        return result.toArray(new int[result.size()][]);
+        return list.toArray(new int[list.size()][]);
+        
     }
 }
