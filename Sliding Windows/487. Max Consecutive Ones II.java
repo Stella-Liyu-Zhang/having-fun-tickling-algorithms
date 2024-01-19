@@ -29,3 +29,30 @@ class Solution {
         return fast - slow;
     }
 }
+
+class Solution {
+    /*
+    chancestoFlip = 1;
+    left 
+    right
+    */
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int chancestoFlip = 1;
+        int left = 0;
+        int right = 0;
+
+        while(right < nums.length){
+            if(nums[right] == 0){
+                chancestoFlip --;
+            }
+            if(chancestoFlip < 0){
+                if(nums[left] == 0){
+                   chancestoFlip ++; 
+                }
+                left ++;
+            }
+            right ++;
+        }
+        return right - left;
+    }
+}
