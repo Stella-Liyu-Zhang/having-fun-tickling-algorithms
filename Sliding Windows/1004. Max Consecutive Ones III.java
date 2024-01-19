@@ -27,3 +27,22 @@ class Solution {
         return fast - slow;
     }
 }
+
+//another attempt
+    public int longestOnes(int[] nums, int k) {
+        int chancestoFlip = k;
+        int left = 0, right = 0;
+        while(right < nums.length){
+            if(nums[right] == 0){
+                chancestoFlip --;  
+            }
+            if(chancestoFlip < 0){
+                if(nums[left] == 0){
+                    chancestoFlip ++;
+                }
+                left ++;
+            }
+            right ++;
+        }
+        return right - left;
+    }
