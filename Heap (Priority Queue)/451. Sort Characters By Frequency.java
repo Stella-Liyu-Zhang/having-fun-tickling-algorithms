@@ -1,28 +1,23 @@
-/*
-throw a hashmap
-max heap!!!, organize all the elements
-StringBuilder, remove things from the heap, throw it into it.
-*/
-
 class Solution {
+    /*
+    maxheap to store all the characters according to their frequency
+
+    */
     public String frequencySort(String s) {
         HashMap<Character, Integer> map = new HashMap();
-        char[] chars = s.toCharArray();
-        for (char c : chars) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
+        for(char c: s.toCharArray()){
+           map.put(c, map.getOrDefault(c, 0) + 1);
         }
-        // max heap building
-        PriorityQueue<Character> maxHeap = new PriorityQueue<>((a, b) -> map.get(b) - map.get(a));
-        maxHeap.addAll(map.keySet());
+        PriorityQueue<Character> pq = new PriorityQueue((s1, s2) -> map.get(s2) - map.get(s1) );
+        pq.addAll(map.keySet());
         StringBuilder sb = new StringBuilder();
-        // loop through the maxHeap
-        while (maxHeap.isEmpty() == false) {
-            char curr = maxHeap.remove();
-            for (int i = 0; i < map.get(curr); i++) {
+        while(!pq.isEmpty()){
+            char curr = pq.poll();
+            for(int i = 0; i < map.get(curr); i ++){
                 sb.append(curr);
             }
         }
-
         return sb.toString();
+
     }
 }
